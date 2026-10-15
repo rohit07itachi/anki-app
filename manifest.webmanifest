@@ -1,0 +1,19 @@
+{
+  "name": "Anki — Always Together",
+  "short_name": "Anki",
+  "description": "Anime-inspired social hangouts and voice-room interface.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0b0f",
+  "theme_color": "#0b0b0f",
+  "icons": [
+    {
+      "src": "icons/anki-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
