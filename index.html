@@ -1147,5 +1147,26 @@ button {
   });
 })();
 </script>
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBqcFM6b0uWB8QpuYIomZSyvyLWq_F5vQ",
+    authDomain: "anki-app-eb3fc.firebaseapp.com",
+    projectId: "anki-app-eb3fc",
+    storageBucket: "anki-app-eb3fc.firebasestorage.app",
+    messagingSenderId: "736169218628",
+    appId: "1:736169218628:web:a3c759076a2b5ae211e211",
+    measurementId: "G-EW3SWXRWPY"
+  };
+
+  const ankiApp = initializeApp(firebaseConfig);
+  const ankiAuth = getAuth(ankiApp);
+  const ankiDB = getFirestore(ankiApp);
+
+  console.log("Anki Firebase connected!");
+</script>
 </body>
 </html>
