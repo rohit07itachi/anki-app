@@ -1,319 +1,1755 @@
-Anki demo: friends, rooms, and profile information are stored on this device.
-    Real online chat and voice calls require a backend.
-  </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#09090d">
+<meta name="description" content="Anki — Your people, your world.">
+<title>Anki — Your People, Your World</title>
 
-</section>
+<style>
+:root {
+  --bg: #09090d;
+  --panel: #131219;
+  --panel2: #1a1720;
+  --red: #c52b46;
+  --red2: #8f1832;
+  --text: #f7f3f5;
+  --muted: #a5a0ab;
+  --line: rgba(255,255,255,.09);
+  --green: #6bd49b;
+}
 
-<!-- CHAT PAGE -->
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
-<section id="chat" class="page">
-  <h1 class="page-title">Squad spaces</h1>
-  <p class="description">Create a room for your crew.</p>
+html {
+  min-height: 100%;
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
 
-  <div class="form">
-    <label for="roomName">New room name</label>
-    <input id="roomName" maxlength="40" placeholder="Late-night anime chat">
-    <button class="primary" onclick="createRoom()">+ Create room</button>
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% -15%, #40121f 0, transparent 48%),
+    var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-size: 14px;
+  overflow-x: hidden;
+}
+
+button, input, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
+input, textarea {
+  min-width: 0;
+}
+
+.app {
+  width: 100%;
+  max-width: 650px;
+  min-height: 100vh;
+  margin: auto;
+  padding: calc(13px + env(safe-area-inset-top))
+    17px calc(100px + env(safe-area-inset-bottom));
+}
+
+/* HEADER */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 27px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  width: 43px;
+  height: 43px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #d43b55, #671126);
+  box-shadow: 0 5px 22px #a31e3838;
+}
+
+.brand-icon svg {
+  width: 31px;
+  height: 31px;
+}
+
+.brand-name {
+  font-size: 26px;
+  font-weight: 850;
+  letter-spacing: -1px;
+}
+
+.brand-sub {
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: white;
+  background: var(--panel);
+  font-size: 18px;
+}
+
+/* GENERAL */
+
+.page {
+  display: none;
+  animation: appear .2s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes appear {
+  from { opacity: .45; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  color: #e76b80;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h1, h2, h3, p {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: clamp(32px, 8vw, 43px);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  margin: 10px 0;
+}
+
+h2 {
+  font-size: 20px;
+  letter-spacing: -.5px;
+  margin-bottom: 5px;
+}
+
+h3 {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.muted {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 27px 0 13px;
+}
+
+.section-head h2 {
+  margin: 0;
+}
+
+.text-button {
+  border: 0;
+  background: none;
+  color: #ed8293;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 7px 0 7px 8px;
+}
+
+.card {
+  background: linear-gradient(145deg, #19151e, #111015);
+  border: 1px solid var(--line);
+  border-radius: 21px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.primary {
+  border: 0;
+  border-radius: 12px;
+  padding: 11px 14px;
+  color: white;
+  background: linear-gradient(135deg, #d53a56, #a21c38);
+  font-weight: 750;
+  font-size: 12px;
+  box-shadow: 0 5px 16px #a11b3426;
+}
+
+.secondary {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: var(--text);
+  background: #24202b;
+  font-weight: 650;
+  font-size: 12px;
+}
+
+.danger {
+  color: #ff8c9d;
+  background: #3a1420;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+
+.field label {
+  color: #d9d3de;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.field input,
+.field textarea,
+.search-input {
+  width: 100%;
+  color: white;
+  background: #0e0d13;
+  border: 1px solid #302a37;
+  border-radius: 12px;
+  padding: 12px;
+  outline: none;
+}
+
+.field input::placeholder,
+.field textarea::placeholder,
+.search-input::placeholder {
+  color: #77717e;
+}
+
+.field textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+/* HOME HERO */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 23px 20px;
+  border: 1px solid #74203380;
+  border-radius: 25px;
+  background:
+    radial-gradient(circle at 100% 0%, #6d172a70, transparent 45%),
+    linear-gradient(135deg, #21121c, #100f15 72%);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  right: -95px;
+  bottom: -100px;
+  border: 1px solid #d63b5730;
+  box-shadow: 0 0 0 20px #d63b5708,
+              0 0 0 40px #d63b5705;
+  pointer-events: none;
+}
+
+.hero h1 span {
+  color: #e84d68;
+}
+
+.hero-copy {
+  max-width: 290px;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  position: relative;
+  z-index: 1;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 18px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff09;
+  border: 1px solid var(--line);
+  color: #d7cdd7;
+  border-radius: 30px;
+  padding: 7px 10px;
+  font-size: 10px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* STATUS */
+
+.status-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 13px;
+  padding: 13px;
+  border-radius: 19px;
+  border: 1px solid var(--line);
+  background: #141219;
+}
+
+.status-avatar {
+  flex: 0 0 44px;
+  height: 44px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #76213a, #311521);
+  font-size: 22px;
+}
+
+.status-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.status-copy strong {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.status-copy span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.status-select {
+  max-width: 112px;
+  color: #f1dfe5;
+  background: #24151e;
+  border: 1px solid #552234;
+  border-radius: 10px;
+  padding: 8px 5px;
+  font-size: 10px;
+}
+
+/* EMBLEM FEATURE */
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 13px;
+  padding: 16px;
+  border-radius: 21px;
+  background: linear-gradient(110deg, #17151c, #21111a);
+  border: 1px solid var(--line);
+}
+
+.feature-mark {
+  flex: 0 0 76px;
+  height: 88px;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  background: #29121d;
+}
+
+.feature-mark svg {
+  width: 70px;
+  height: 80px;
+}
+
+.feature h2 {
+  font-size: 17px;
+  margin: 6px 0;
+}
+
+.feature p {
+  font-size: 11px;
+  margin: 0;
+}
+
+/* FRIENDS */
+
+.friends-row {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding: 2px 0 9px;
+  scrollbar-width: none;
+}
+
+.friends-row::-webkit-scrollbar {
+  display: none;
+}
+
+.friend {
+  flex: 0 0 67px;
+  text-align: center;
+}
+
+.avatar {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 8px;
+  border-radius: 19px;
+  border: 1px solid #6b2c40;
+  background: linear-gradient(145deg, #42202e, #17151e);
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  position: relative;
+}
+
+.avatar.online::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid var(--bg);
+  background: var(--green);
+  border-radius: 50%;
+}
+
+.friend-name {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.friend-status {
+  color: var(--muted);
+  font-size: 9px;
+  display: block;
+  margin-top: 4px;
+}
+
+/* ROOMS */
+
+.room-list {
+  display: grid;
+  gap: 10px;
+}
+
+.room {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: #141219;
+}
+
+.room-icon {
+  flex: 0 0 43px;
+  height: 43px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: #351522;
+  font-size: 20px;
+}
+
+.room-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.room-info strong {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+.room-info small {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.room-button {
+  flex-shrink: 0;
+}
+
+/* CHAT */
+
+.chat-intro {
+  margin-bottom: 18px;
+}
+
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  min-height: 220px;
+  max-height: 45vh;
+  overflow-y: auto;
+  padding: 13px;
+  background: #0d0c12;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  margin-bottom: 12px;
+}
+
+.message {
+  max-width: 85%;
+  align-self: flex-start;
+  padding: 10px 12px;
+  border-radius: 13px 13px 13px 4px;
+  background: #211c29;
+  overflow-wrap: anywhere;
+}
+
+.message.mine {
+  align-self: flex-end;
+  border-radius: 13px 13px 4px 13px;
+  background: #742039;
+}
+
+.message small {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 9px;
+  color: #d8b7c2;
+}
+
+.message p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.chat-form {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-form input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  color: white;
+  background: #15121a;
+  border: 1px solid #302a37;
+  border-radius: 13px;
+  padding: 12px;
+}
+
+.demo-note {
+  text-align: center;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+  margin-top: 12px;
+}
+
+/* FRIEND PAGE */
+
+.add-row {
+  display: flex;
+  gap: 8px;
+  margin: 13px 0 17px;
+}
+
+.add-row input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  background: #0e0d13;
+  border: 1px solid #302a37;
+  color: white;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.full-friend {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.full-friend:last-child {
+  border-bottom: 0;
+}
+
+.full-friend .avatar {
+  flex: 0 0 47px;
+  width: 47px;
+  height: 47px;
+  border-radius: 15px;
+  margin: 0;
+  font-size: 20px;
+}
+
+.full-friend .friend-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.friend-details strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.friend-details small {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+/* PROFILE */
+
+.profile-cover {
+  text-align: center;
+  padding: 23px 15px;
+  background:
+    radial-gradient(circle at 50% 0%, #6c1a3270, transparent 65%),
+    #151219;
+  border: 1px solid var(--line);
+  border-radius: 23px;
+  margin-bottom: 16px;
+}
+
+.profile-avatar {
+  width: 82px;
+  height: 82px;
+  border-radius: 27px;
+  background: linear-gradient(145deg, #a62946, #381322);
+  border: 2px solid #d94a66;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  font-size: 37px;
+}
+
+.profile-cover h2 {
+  font-size: 23px;
+}
+
+.profile-cover p {
+  margin: 0;
+  font-size: 12px;
+}
+
+/* SETTINGS */
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.setting-row:last-child {
+  border-bottom: 0;
+}
+
+.setting-icon {
+  width: 39px;
+  height: 39px;
+  flex: 0 0 39px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  background: #2b1721;
+  font-size: 17px;
+}
+
+.setting-copy {
+  flex: 1;
+}
+
+.setting-copy strong {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.setting-copy small {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav {
+  position: fixed;
+  z-index: 20;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 650px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px;
+  padding: 8px 11px calc(7px + env(safe-area-inset-bottom));
+  background: rgba(13, 12, 17, .96);
+  border-top: 1px solid #ffffff12;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.nav-button {
+  border: 0;
+  background: transparent;
+  color: #928b9a;
+  border-radius: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 2px;
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.nav-button .nav-icon {
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.nav-button.active {
+  background: #371522;
+  color: #ff8398;
+}
+
+/* TOAST */
+
+.toast {
+  position: fixed;
+  z-index: 50;
+  bottom: calc(82px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translate(-50%, 12px);
+  width: max-content;
+  max-width: calc(100% - 32px);
+  border: 1px solid #5b2a3b;
+  background: #21131c;
+  color: white;
+  border-radius: 13px;
+  padding: 12px 16px;
+  font-size: 12px;
+  box-shadow: 0 10px 35px #0008;
+  opacity: 0;
+  pointer-events: none;
+  transition: .2s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.empty {
+  text-align: center;
+  padding: 22px 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@media (max-width: 380px) {
+  .app {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .hero {
+    padding: 19px 15px;
+  }
+
+  .feature {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .feature-mark {
+    flex-basis: 63px;
+    height: 78px;
+  }
+
+  .feature-mark svg {
+    width: 60px;
+    height: 70px;
+  }
+
+  .status-select {
+    max-width: 95px;
+  }
+
+  .room {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .primary, .secondary {
+    padding: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-icon" aria-label="Anki logo">
+      <svg viewBox="0 0 50 50" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 39L23 8L40 39L29 34L24 23L19 34L8 39Z"
+          stroke="#fff" stroke-width="3.1"
+          stroke-linejoin="round"/>
+        <path d="M7 31C16 39 29 43 43 31"
+          stroke="#ff9eae" stroke-width="4"
+          stroke-linecap="round"/>
+        <path d="M10 35C19 42 30 44 40 36"
+          stroke="#fff" stroke-width="1.4"
+          stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="brand-name">Anki<span style="color:#e34c68">.</span></div>
+      <div class="brand-sub">Your people, your world</div>
+    </div>
   </div>
 
-  <div id="allRooms"></div>
+  <div class="header-actions">
+    <button class="icon-button" aria-label="Settings"
+      onclick="navigate('settings')">⚙</button>
+    <button class="icon-button" aria-label="Profile"
+      onclick="navigate('profile')">☻</button>
+  </div>
+</header>
 
-  <p class="note">Joining a room is a demo action, not a live voice call.</p>
-</section>
+<!-- HOME -->
 
-<!-- FRIENDS PAGE -->
+<main id="home" class="page active">
+  <section class="hero">
+    <div class="eyebrow">✦ Your world starts here</div>
+    <h1>Beyond the<br><span>walls.</span><br>Together.</h1>
+    <p class="muted hero-copy">
+      Find your people. Build your squad. Make a little world
+      that belongs to you.
+    </p>
+    <div class="hero-actions">
+      <button class="primary" onclick="navigate('friends')">
+        + Find your people
+      </button>
+      <button class="secondary" onclick="navigate('rooms')">
+        ⚔ Explore squads
+      </button>
+    </div>
+    <div class="pills">
+      <span class="pill"><span class="dot"></span> Your own space</span>
+      <span class="pill">✦ Made for your people</span>
+    </div>
+  </section>
 
-<section id="friends" class="page">
-  <h1 class="page-title">Your squad</h1>
-  <p class="description">Your people, your world.</p>
+  <section class="status-card">
+    <div class="status-avatar" id="homeAvatar">🧣</div>
+    <div class="status-copy">
+      <strong id="homeName">Your corner of Anki</strong>
+      <span id="homeStatusText">Choose your current vibe</span>
+    </div>
+    <select class="status-select" id="statusSelect"
+      aria-label="Your status" onchange="changeStatus()">
+      <option value="Available">🟢 Available</option>
+      <option value="Chilling">🌙 Chilling</option>
+      <option value="Busy">🔴 Busy</option>
+      <option value="Invisible">👻 Invisible</option>
+    </select>
+  </section>
 
-  <div class="form">
-    <label for="friendName">Friend display name</label>
-    <input id="friendName" maxlength="24" placeholder="Enter a name">
-    <button class="primary" onclick="addFriend()">Add friend</button>
+  <section class="feature">
+    <div class="feature-mark">
+      <svg viewBox="0 0 100 110" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 84L44 12L77 84L55 73L44 49L34 73L12 84Z"
+          stroke="#f3e8ee" stroke-width="4"
+          stroke-linejoin="round"/>
+        <path d="M6 69C25 87 59 96 91 69"
+          stroke="#d84965" stroke-width="8"
+          stroke-linecap="round"/>
+        <path d="M9 77C29 93 62 99 87 77"
+          stroke="#f6dce4" stroke-width="2"
+          stroke-linecap="round"/>
+        <path d="M13 85L7 95L26 91"
+          stroke="#d84965" stroke-width="3"/>
+        <path d="M86 85L93 95L74 91"
+          stroke="#d84965" stroke-width="3"/>
+      </svg>
+    </div>
+    <div>
+      <div class="eyebrow">Your people. Your world.</div>
+      <h2>A different kind of connection.</h2>
+      <p class="muted">
+        Your squad, your memories, your story. Start small.
+        Make it yours.
+      </p>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <h2>Your squad</h2>
+    <button class="text-button" onclick="navigate('friends')">
+      All friends →
+    </button>
   </div>
 
-  <div id="allFriends" class="friends"></div>
-</section>
+  <div class="friends-row" id="homeFriends"></div>
 
-<!-- PROFILE PAGE -->
-
-<section id="profile" class="page">
-  <h1 class="page-title">Your profile</h1>
-  <p class="description">Make your corner of the world yours.</p>
-
-  <div class="form">
-    <label for="displayName">Display name</label>
-    <input id="displayName" maxlength="24" value="Scout">
-
-    <label for="bioText">About you</label>
-    <textarea id="bioText" maxlength="180" placeholder="Your story starts here..."></textarea>
-
-    <button class="primary" onclick="saveProfile()">Save profile</button>
-
-    <p class="note">Profile data is saved on this device only.</p>
+  <div class="section-head">
+    <h2>Squad spaces</h2>
+    <button class="text-button" onclick="navigate('rooms')">
+      View all →
+    </button>
   </div>
-</section>
 
+  <div class="room-list" id="homeRooms"></div>
+
+  <div class="demo-note">
+    Anki demo · Your information stays in this browser on this device.
+  </div>
 </main>
 
+<!-- CHAT -->
+
+<section id="chat" class="page">
+  <div class="chat-intro">
+    <div class="eyebrow">Your conversations</div>
+    <h1>Little hellos<span style="color:#e34c68">.</span></h1>
+    <p class="muted">A little space to say what's on your mind.</p>
+  </div>
+
+  <div class="card">
+    <h3>Demo chat</h3>
+    <p class="muted" style="font-size:12px">
+      Try sending a message. Messages are saved locally on this device.
+    </p>
+  </div>
+
+  <div class="chat-box" id="chatMessages" aria-live="polite"></div>
+
+  <form class="chat-form" id="chatForm">
+    <input id="chatInput" maxlength="500"
+      placeholder="Say something..." autocomplete="off"
+      aria-label="Message">
+    <button class="primary" type="submit">Send ↗</button>
+  </form>
+
+  <p class="demo-note">
+    Demo only. Messages are not sent to other users.
+  </p>
+</section>
+
+<!-- FRIENDS -->
+
+<section id="friends" class="page">
+  <div class="eyebrow">Find your people</div>
+  <h1>Your squad<span style="color:#e34c68">.</span></h1>
+  <p class="muted">Every great story starts with someone.</p>
+
+  <form id="friendForm" class="add-row">
+    <input id="friendInput" maxlength="30"
+      placeholder="Friend display name" required>
+    <button class="primary" type="submit">+ Add</button>
+  </form>
+
+  <div class="card">
+    <div class="section-head" style="margin-top:0">
+      <h2>Your friends</h2>
+      <span class="pill" id="friendCount">0 people</span>
+    </div>
+    <div id="allFriends"></div>
+  </div>
+
+  <p class="demo-note">
+    Adding a friend here creates a local demo entry.
+    It does not send an invitation online.
+  </p>
+</section>
+
+<!-- ROOMS -->
+
+<section id="rooms" class="page">
+  <div class="eyebrow">Find your crew</div>
+  <h1>Squad spaces<span style="color:#e34c68">.</span></h1>
+  <p class="muted">Create a room for your crew.</p>
+
+  <form id="roomForm" class="card">
+    <div class="field">
+      <label for="roomInput">New room name</label>
+      <input id="roomInput" maxlength="35"
+        placeholder="Late-night anime chat" required>
+    </div>
+    <button class="primary" type="submit" style="width:100%">
+      + Create squad room
+    </button>
+  </form>
+
+  <div class="section-head">
+    <h2>Explore rooms</h2>
+    <span class="pill" id="roomCount">0 rooms</span>
+  </div>
+
+  <div class="room-list" id="allRooms"></div>
+
+  <p class="demo-note">
+    Joining a room is a demo action, not a live voice call.
+  </p>
+</section>
+
+<!-- PROFILE -->
+
+<section id="profile" class="page">
+  <div class="eyebrow">Your corner of the world</div>
+  <h1>Your profile<span style="color:#e34c68">.</span></h1>
+  <p class="muted">Make your corner of the world yours.</p>
+
+  <div class="profile-cover">
+    <div class="profile-avatar" id="profileAvatar">🧣</div>
+    <h2 id="profileNamePreview">Itachi</h2>
+    <p class="muted" id="profileBioPreview">Your story starts here...</p>
+  </div>
+
+  <form id="profileForm" class="card">
+    <div class="field">
+      <label for="profileName">Display name</label>
+      <input id="profileName" maxlength="30"
+        placeholder="Your name" required>
+    </div>
+
+    <div class="field">
+      <label for="profileBio">About you</label>
+      <textarea id="profileBio" maxlength="160"
+        placeholder="Your story starts here..."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="profileEmoji">Choose your avatar</label>
+      <select id="profileEmoji"
+        style="width:100%;padding:12px;border-radius:12px;
+        background:#0e0d13;color:white;border:1px solid #302a37">
+        <option value="🧣">🧣 Scarf</option>
+        <option value="⚔️">⚔️ Warrior</option>
+        <option value="🌙">🌙 Moon</option>
+        <option value="🖤">🖤 Dark heart</option>
+        <option value="🐈‍⬛">🐈‍⬛ Black cat</option>
+        <option value="🔥">🔥 Fire</option>
+        <option value="🌸">🌸 Sakura</option>
+        <option value="👑">👑 Crown</option>
+      </select>
+    </div>
+
+    <button class="primary" type="submit" style="width:100%">
+      Save profile
+    </button>
+  </form>
+
+  <div class="card">
+    <div class="setting-row">
+      <div class="setting-icon">👥</div>
+      <div class="setting-copy">
+        <strong>Your friends</strong>
+        <small id="profileFriendCount">0 friends</small>
+      </div>
+    </div>
+    <div class="setting-row">
+      <div class="setting-icon">⚔️</div>
+      <div class="setting-copy">
+        <strong>Your squad spaces</strong>
+        <small id="profileRoomCount">0 rooms</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SETTINGS -->
+
+<section id="settings" class="page">
+  <div class="eyebrow">Make it yours</div>
+  <h1>Settings<span style="color:#e34c68">.</span></h1>
+  <p class="muted">Your Anki space, your way.</p>
+
+  <div class="card">
+    <div class="setting-row">
+      <div class="setting-icon">🎨</div>
+      <div class="setting-copy">
+        <strong>Appearance</strong>
+        <small>Dark anime-inspired theme</small>
+      </div>
+      <span class="pill">Active</span>
+    </div>
+    <div class="setting-row">
+      <div class="setting-icon">💾</div>
+      <div class="setting-copy">
+        <strong>Local storage</strong>
+        <small>Your demo data stays in this browser.</small>
+      </div>
+    </div>
+    <div class="setting-row">
+      <div class="setting-icon">🔐</div>
+      <div class="setting-copy">
+        <strong>Online accounts</strong>
+        <small>A backend is needed for real accounts.</small>
+      </div>
+    </div>
+    <div class="setting-row">
+      <div class="setting-icon">🎙️</div>
+      <div class="setting-copy">
+        <strong>Live voice rooms</strong>
+        <small>Not connected in this demo.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>About Anki</h3>
+    <p class="muted" style="font-size:12px">
+      Anki is your little corner of the world.
+      Bring your people together and make memories.
+    </p>
+    <div class="eyebrow">YOUR PEOPLE, YOUR WORLD.</div>
+  </div>
+
+  <button class="secondary danger" style="width:100%"
+    onclick="resetData()">Reset demo data</button>
+
+  <p class="demo-note">
+    Resetting removes locally saved demo friends, rooms,
+    messages and profile settings.
+  </p>
+</section>
+
+</div>
+
+<!-- FIXED BOTTOM NAVIGATION -->
+
 <nav class="bottom-nav" aria-label="Main navigation">
-  <button class="active" data-page="home" onclick="showPage('home')">
-    <b>⌂</b>Home
+  <button class="nav-button active" data-page="home"
+    onclick="navigate('home')">
+    <span class="nav-icon">⌂</span>
+    <span>Home</span>
   </button>
 
-  <button data-page="chat" onclick="showPage('chat')">
-    <b>▢</b>Chat
+  <button class="nav-button" data-page="chat"
+    onclick="navigate('chat')">
+    <span class="nav-icon">▢</span>
+    <span>Chat</span>
   </button>
 
-  <button data-page="friends" onclick="showPage('friends')">
-    <b>♧</b>Friends
+  <button class="nav-button" data-page="friends"
+    onclick="navigate('friends')">
+    <span class="nav-icon">♧</span>
+    <span>Friends</span>
   </button>
 
-  <button data-page="profile" onclick="showPage('profile')">
-    <b>◉</b>Profile
+  <button class="nav-button" data-page="rooms"
+    onclick="navigate('rooms')">
+    <span class="nav-icon">⚔</span>
+    <span>Squads</span>
+  </button>
+
+  <button class="nav-button" data-page="profile"
+    onclick="navigate('profile')">
+    <span class="nav-icon">●</span>
+    <span>Profile</span>
   </button>
 </nav>
 
-<div id="toast" role="status" aria-live="polite"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-const defaultFriends = [
-  {name: "Mikasa", icon: "🧣"},
-  {name: "Armin", icon: "✦"}
-];
+"use strict";
 
-const defaultRooms = [
-  {
-    name: "Beyond the Walls",
-    detail: "Anime · chill · meet your squad",
-    icon: "⚔️",
-    members: 3
+/* ANKI LOCAL DEMO APP */
+
+const STORAGE_KEY = "anki_complete_app_v1";
+
+const defaultData = {
+  profile: {
+    name: "Itachi",
+    bio: "Your story starts here...",
+    emoji: "🧣"
   },
-  {
-    name: "Midnight Scouts",
-    detail: "Late-night talks and music",
-    icon: "🌙",
-    members: 2
-  }
-];
+  status: "Available",
+  friends: [
+    { id: "mikasa", name: "Mikasa", emoji: "🧣", online: true },
+    { id: "armin", name: "Armin", emoji: "📘", online: true }
+  ],
+  rooms: [
+    {
+      id: "walls",
+      name: "Beyond the Walls",
+      icon: "⚔️",
+      members: 4,
+      joined: false
+    },
+    {
+      id: "scouts",
+      name: "Midnight Scouts",
+      icon: "🌙",
+      members: 7,
+      joined: false
+    }
+  ],
+  messages: [
+    {
+      id: "welcome",
+      mine: false,
+      name: "Anki",
+      text: "Welcome to your little corner of the world. 🧣"
+    }
+  ]
+};
 
-function loadData(key, fallback) {
+function cloneDefault() {
+  return JSON.parse(JSON.stringify(defaultData));
+}
+
+function loadData() {
   try {
-    const saved = localStorage.getItem(key);
-    return saved ? JSON.parse(saved) : fallback;
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return cloneDefault();
+
+    const saved = JSON.parse(raw);
+    const fresh = cloneDefault();
+
+    return {
+      ...fresh,
+      ...saved,
+      profile: { ...fresh.profile, ...(saved.profile || {}) },
+      friends: Array.isArray(saved.friends)
+        ? saved.friends : fresh.friends,
+      rooms: Array.isArray(saved.rooms)
+        ? saved.rooms : fresh.rooms,
+      messages: Array.isArray(saved.messages)
+        ? saved.messages : fresh.messages
+    };
   } catch (error) {
-    return fallback;
+    return cloneDefault();
   }
 }
 
-function saveData(key, value) {
+let data = loadData();
+let toastTimer;
+
+function saveData() {
   try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch (error) {}
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    return true;
+  } catch (error) {
+    showToast("Could not save. Check browser storage.");
+    return false;
+  }
 }
-
-let friends = loadData("anki-friends", defaultFriends);
-let rooms = loadData("anki-rooms", defaultRooms);
-
-const statuses = [
-  "Available to hang out",
-  "Watching anime",
-  "Busy on a mission",
-  "Taking a quiet break"
-];
-
-let statusIndex = 0;
 
 function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[char]);
+  return String(value).replace(/[&<>"']/g, function(char) {
+    const map = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    };
+    return map[char];
+  });
 }
 
 function showToast(message) {
   const toast = document.getElementById("toast");
   toast.textContent = message;
-  toast.style.display = "block";
+  toast.classList.add("show");
 
-  clearTimeout(showToast.timer);
-
-  showToast.timer = setTimeout(() => {
-    toast.style.display = "none";
-  }, 2300);
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function() {
+    toast.classList.remove("show");
+  }, 2400);
 }
 
-function showPage(pageId) {
-  document.querySelectorAll(".page").forEach(page => {
-    page.classList.toggle("active", page.id === pageId);
+function navigate(page) {
+  const target = document.getElementById(page);
+  if (!target) return;
+
+  document.querySelectorAll(".page").forEach(function(section) {
+    section.classList.toggle("active", section.id === page);
   });
 
-  document.querySelectorAll(".bottom-nav button").forEach(button => {
-    button.classList.toggle("active", button.dataset.page === pageId);
+  document.querySelectorAll(".nav-button").forEach(function(button) {
+    button.classList.toggle("active", button.dataset.page === page);
   });
 
-  renderFriends();
-  renderRooms();
+  if (page === "settings") {
+    document.querySelectorAll(".nav-button").forEach(function(button) {
+      button.classList.remove("active");
+    });
+  }
 
-  window.scrollTo({top: 0, behavior: "smooth"});
+  if (page === "chat") renderMessages();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function cycleStatus() {
-  statusIndex = (statusIndex + 1) % statuses.length;
-  document.getElementById("statusText").textContent = statuses[statusIndex];
-  showToast("Status updated");
+function changeStatus() {
+  data.status = document.getElementById("statusSelect").value;
+  saveData();
+  renderAll();
+  showToast("Status updated ✦");
 }
 
-function friendCard(friend, index, removable = false) {
-  return `
-    <div class="friend">
-      <div class="avatar">${escapeHTML(friend.icon || "✦")}</div>
-      <small>${escapeHTML(friend.name)}</small>
-      ${removable ? `
-        <button class="text-btn" onclick="removeFriend(${index})">Remove</button>
-      ` : ""}
-    </div>
-  `;
-}
+function renderHomeFriends() {
+  const container = document.getElementById("homeFriends");
 
-function renderFriends() {
-  const home = document.getElementById("homeFriends");
-  const all = document.getElementById("allFriends");
-
-  home.innerHTML = friends.map((friend, index) =>
-    friendCard(friend, index)
-  ).join("") + `
-    <button class="friend" onclick="showPage('friends')"
-      style="border:0;background:none;color:inherit">
-      <span class="avatar add-avatar">+</span>
-      <small>Add friend</small>
-    </button>
-  `;
-
-  all.innerHTML = friends.length
-    ? friends.map((friend, index) =>
-        friendCard(friend, index, true)
-      ).join("")
-    : `<p class="note">Your squad is waiting. Add your first friend above.</p>`;
-}
-
-function addFriend() {
-  const input = document.getElementById("friendName");
-  const name = input.value.trim();
-
-  if (!name) {
-    showToast("Enter a name first");
-    input.focus();
+  if (!data.friends.length) {
+    container.innerHTML =
+      '<div class="empty">Your squad is waiting.<br>Add your first friend!</div>';
     return;
   }
 
-  if (friends.some(friend => friend.name.toLowerCase() === name.toLowerCase())) {
-    showToast("That name is already in your squad");
-    return;
-  }
-
-  friends.push({name: name, icon: "✦"});
-  saveData("anki-friends", friends);
-
-  input.value = "";
-  renderFriends();
-  showToast(name + " added");
+  container.innerHTML = data.friends.slice(0, 12).map(function(friend) {
+    return `
+      <div class="friend">
+        <div class="avatar ${friend.online ? "online" : ""}">
+          ${escapeHTML(friend.emoji || "👤")}
+        </div>
+        <span class="friend-name">${escapeHTML(friend.name)}</span>
+        <span class="friend-status">
+          ${friend.online ? "On your squad" : "Friend"}
+        </span>
+      </div>`;
+  }).join("");
 }
 
-function removeFriend(index) {
-  friends.splice(index, 1);
-  saveData("anki-friends", friends);
-  renderFriends();
-  showToast("Friend removed");
-}
+function roomHTML(room, full) {
+  const joined = room.joined;
 
-function roomCard(room, index) {
   return `
-    <article class="room">
+    <div class="room">
       <div class="room-icon">${escapeHTML(room.icon || "⚔️")}</div>
-
       <div class="room-info">
         <strong>${escapeHTML(room.name)}</strong>
-        <small>
-          ${escapeHTML(room.detail || "Squad room")}
-          · ${Number(room.members) || 1} here
-        </small>
+        <small>${room.members || 1} squad members · Demo room</small>
       </div>
-
-      <button class="primary" onclick="joinRoom(${index})">Join</button>
-    </article>
-  `;
+      <button class="${joined ? "secondary" : "primary"} room-button"
+        onclick="toggleRoom('${escapeHTML(room.id)}')">
+        ${joined ? "Joined ✓" : "Join"}
+      </button>
+      ${full && room.id.startsWith("custom-")
+        ? `<button class="secondary danger"
+            aria-label="Delete room"
+            onclick="deleteRoom('${escapeHTML(room.id)}')">×</button>`
+        : ""}
+    </div>`;
 }
 
 function renderRooms() {
-  const content = rooms.length
-    ? rooms.map((room, index) => roomCard(room, index)).join("")
-    : `<p class="note">No rooms yet. Create one above.</p>`;
+  const homeRooms = document.getElementById("homeRooms");
+  const allRooms = document.getElementById("allRooms");
 
-  document.getElementById("homeRooms").innerHTML = content;
-  document.getElementById("allRooms").innerHTML = content;
-}
+  if (!data.rooms.length) {
+    const empty = '<div class="empty">No rooms yet. Create your first squad!</div>';
+    homeRooms.innerHTML = empty;
+    allRooms.innerHTML = empty;
+  } else {
+    homeRooms.innerHTML = data.rooms.slice(0, 2)
+      .map(function(room) { return roomHTML(room, false); }).join("");
 
-function joinRoom(index) {
-  if (rooms[index]) {
-    showToast("Joined " + rooms[index].name + " — demo room");
+    allRooms.innerHTML = data.rooms
+      .map(function(room) { return roomHTML(room, true); }).join("");
   }
+
+  document.getElementById("roomCount").textContent =
+    data.rooms.length + (data.rooms.length === 1 ? " room" : " rooms");
 }
 
-function createRoom() {
-  const input = document.getElementById("roomName");
-  const name = input.value.trim();
+function renderFriends() {
+  const container = document.getElementById("allFriends");
 
-  if (!name) {
-    showToast("Give your room a name first");
-    input.focus();
+  document.getElementById("friendCount").textContent =
+    data.friends.length +
+    (data.friends.length === 1 ? " person" : " people");
+
+  if (!data.friends.length) {
+    container.innerHTML =
+      '<div class="empty">No friends yet.<br>Add someone to start your squad.</div>';
     return;
   }
 
-  rooms.unshift({
-    name: name,
-    detail: "Your own squad room",
-    icon: "⚔️",
-    members: 1
-  });
-
-  saveData("anki-rooms", rooms);
-  input.value = "";
-  renderRooms();
-  showToast("Room created on this device");
+  container.innerHTML = data.friends.map(function(friend) {
+    return `
+      <div class="full-friend">
+        <div class="avatar ${friend.online ? "online" : ""}">
+          ${escapeHTML(friend.emoji || "👤")}
+        </div>
+        <div class="friend-details">
+          <strong>${escapeHTML(friend.name)}</strong>
+          <small>${friend.online ? "Your squad member" : "Friend"}</small>
+        </div>
+        <button class="secondary"
+          onclick="messageFriend('${escapeHTML(friend.id)}')">Chat</button>
+        <button class="secondary danger"
+          aria-label="Remove friend"
+          onclick="removeFriend('${escapeHTML(friend.id)}')">×</button>
+      </div>`;
+  }).join("");
 }
 
-function saveProfile() {
-  const name = document.getElementById("displayName").value.trim() || "Scout";
-  const bio = document.getElementById("bioText").value.trim();
+function renderMessages() {
+  const container = document.getElementById("chatMessages");
 
-  saveData("anki-profile", {name: name, bio: bio});
-  showToast("Profile saved on this device");
-}
-
-function initialize() {
-  const profile = loadData("anki-profile", null);
-
-  if (profile) {
-    document.getElementById("displayName").value = profile.name || "Scout";
-    document.getElementById("bioText").value = profile.bio || "";
+  if (!data.messages.length) {
+    container.innerHTML =
+      '<div class="empty">No messages yet. Say hello!</div>';
+    return;
   }
 
-  renderFriends();
-  renderRooms();
+  container.innerHTML = data.messages.map(function(message) {
+    return `
+      <div class="message ${message.mine ? "mine" : ""}">
+        <small>${escapeHTML(message.mine ? "You" : message.name || "Anki")}</small>
+        <p>${escapeHTML(message.text)}</p>
+      </div>`;
+  }).join("");
+
+  container.scrollTop = container.scrollHeight;
 }
 
-initialize();
+function renderProfile() {
+  const profile = data.profile;
+
+  document.getElementById("profileName").value = profile.name || "";
+  document.getElementById("profileBio").value = profile.bio || "";
+  document.getElementById("profileEmoji").value = profile.emoji || "🧣";
+
+  document.getElementById("profileNamePreview").textContent =
+    profile.name || "Your name";
+
+  document.getElementById("profileBioPreview").textContent =
+    profile.bio || "Your story starts here...";
+
+  document.getElementById("profileAvatar").textContent =
+    profile.emoji || "🧣";
+
+  document.getElementById("homeAvatar").textContent =
+    profile.emoji || "🧣";
+
+  document.getElementById("homeName").textContent =
+    profile.name || "Your corner of Anki";
+
+  document.getElementById("profileFriendCount").textContent =
+    data.friends.length + (data.friends.length === 1 ? " friend" : " friends");
+
+  document.getElementById("profileRoomCount").textContent =
+    data.rooms.length + (data.rooms.length === 1 ? " room" : " rooms");
+}
+
+function renderStatus() {
+  const select = document.getElementById("statusSelect");
+  select.value = data.status || "Available";
+
+  const labels = {
+    Available: "Ready to connect with your people",
+    Chilling: "Taking it easy today",
+    Busy: "Doing my own thing right now",
+    Invisible: "Keeping a low profile"
+  };
+
+  document.getElementById("homeStatusText").textContent =
+    labels[data.status] || labels.Available;
+}
+
+function renderAll() {
+  renderHomeFriends();
+  renderRooms();
+  renderFriends();
+  renderMessages();
+  renderProfile();
+  renderStatus();
+}
+
+function toggleRoom(id) {
+  const room = data.rooms.find(function(item) {
+    return item.id === id;
+  });
+
+  if (!room) return;
+
+  room.joined = !room.joined;
+  room.members = Math.max(1, (room.members || 1) + (room.joined ? 1 : -1));
+
+  saveData();
+  renderAll();
+
+  showToast(room.joined
+    ? "You joined " + room.name + " ⚔️"
+    : "You left " + room.name);
+}
+
+function deleteRoom(id) {
+  const room = data.rooms.find(function(item) {
+    return item.id === id;
+  });
+
+  if (!room) return;
+
+  if (!window.confirm('Delete "' + room.name + '"?')) return;
+
+  data.rooms = data.rooms.filter(function(item) {
+    return item.id !== id;
+  });
+
+  saveData();
+  renderAll();
+  showToast("Room deleted");
+}
+
+function removeFriend(id) {
+  const friend = data.friends.find(function(item) {
+    return item.id === id;
+  });
+
+  if (!friend) return;
+
+  if (!window.confirm("Remove " + friend.name + " from your demo squad?")) {
+    return;
+  }
+
+  data.friends = data.friends.filter(function(item) {
+    return item.id !== id;
+  });
+
+  saveData();
+  renderAll();
+  showToast("Friend removed");
+}
+
+function messageFriend(id) {
+  const friend = data.friends.find(function(item) {
+    return item.id === id;
+  });
+
+  if (!friend) return;
+
+  navigate("chat");
+  document.getElementById("chatInput").focus();
+  showToast("Demo chat · " + friend.name);
+}
+
+document.getElementById("friendForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const input = document.getElementById("friendInput");
+  const name = input.value.trim();
+
+  if (!name) {
+    showToast("Enter a friend's name");
+    return;
+  }
+
+  const duplicate = data.friends.some(function(friend) {
+    return friend.name.toLowerCase() === name.toLowerCase();
+  });
+
+  if (duplicate) {
+    showToast("That friend is already in your squad");
+    return;
+  }
+
+  data.friends.push({
+    id: "friend-" + Date.now(),
+    name: name,
+    emoji: ["🌙", "⚔️", "🌸", "🖤", "🔥"][
+      Math.floor(Math.random() * 5)
+    ],
+    online: false
+  });
+
+  input.value = "";
+  saveData();
+  renderAll();
+  showToast(name + " added to your squad!");
+});
+
+document.getElementById("roomForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const input = document.getElementById("roomInput");
+  const name = input.value.trim();
+
+  if (!name) {
+    showToast("Enter a room name");
+    return;
+  }
+
+  const duplicate = data.rooms.some(function(room) {
+    return room.name.toLowerCase() === name.toLowerCase();
+  });
+
+  if (duplicate) {
+    showToast("A room with that name already exists");
+    return;
+  }
+
+  data.rooms.push({
+    id: "custom-" + Date.now(),
+    name: name,
+    icon: "⚔️",
+    members: 1,
+    joined: true
+  });
+
+  input.value = "";
+  saveData();
+  renderAll();
+  showToast("Your squad room is ready!");
+});
+
+document.getElementById("profileForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("profileName").value.trim();
+
+  if (!name) {
+    showToast("Please enter your display name");
+    return;
+  }
+
+  data.profile = {
+    name: name,
+    bio: document.getElementById("profileBio").value.trim(),
+    emoji: document.getElementById("profileEmoji").value
+  };
+
+  saveData();
+  renderAll();
+  showToast("Your profile has been saved ✦");
+});
+
+document.getElementById("chatForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const input = document.getElementById("chatInput");
+  const text = input.value.trim();
+
+  if (!text) return;
+
+  data.messages.push({
+    id: "msg-" + Date.now(),
+    mine: true,
+    name: data.profile.name || "You",
+    text: text
+  });
+
+  /* Keep the local demo from growing indefinitely. */
+  if (data.messages.length > 150) {
+    data.messages = data.messages.slice(-150);
+  }
+
+  input.value = "";
+  saveData();
+  renderMessages();
+});
+
+function resetData() {
+  const confirmed = window.confirm(
+    "Reset Anki demo data on this device? This removes your saved demo friends, rooms, messages and profile."
+  );
+
+  if (!confirmed) return;
+
+  data = cloneDefault();
+
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (error) {}
+
+  saveData();
+  renderAll();
+  navigate("home");
+  showToast("Anki demo has been reset");
+}
+
+/* Start the app */
+renderAll();
 </script>
 
 </body>
 </html>
-
-
 
 
     
