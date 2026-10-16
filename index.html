@@ -29,6 +29,60 @@ button,input{font:inherit}button{cursor:pointer;border:0;color:inherit}.app{max-
 .modalback{position:fixed;inset:0;background:#0009;z-index:10;display:none;align-items:flex-end;justify-content:center}.modalback.show{display:flex}.modal{width:min(100%,600px);background:#191c29;border:1px solid #343951;border-radius:28px 28px 0 0;padding:22px 18px calc(24px + env(safe-area-inset-bottom));max-height:88dvh;overflow:auto}.modalhead{display:flex;justify-content:space-between;align-items:center}.modal h2{margin:0;font-size:21px}.close{background:#2a2e40;border-radius:12px;width:38px;height:38px;font-size:21px}.field{display:block;margin:16px 0 6px;color:var(--muted);font-size:12px}.input{width:100%;background:#11191e;border:1px solid #3b4d55;border-radius:14px;padding:13px;color:var(--text);outline:none}.primary{width:100%;background:var(--blue);border-radius:15px;padding:14px;font-weight:800;margin-top:15px}.roomhero{text-align:center;padding:22px 0 14px}.roomhero .avatar{width:84px;height:84px;margin:auto;border-radius:28px;font-size:38px}.roomhero h2{margin:12px 0 5px}.roomhero p{margin:0;color:var(--muted);font-size:13px}.participants{display:flex;justify-content:center;gap:15px;margin:20px 0}.participant{text-align:center;font-size:11px;color:var(--muted)}.participant .avatar{width:52px;height:52px;margin:0 auto 6px;font-size:24px}
 .controls{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.control{background:#292e42;border-radius:17px;padding:14px 5px;font-size:12px}.control span{display:block;font-size:22px;margin-bottom:6px}.control.on{background:#3b5338;color:#e1efd6}.control.danger{background:#8d2f43}.notice{border:1px solid #5a5335;background:#302b1c;color:#f3dba1;border-radius:15px;padding:12px;font-size:12px;line-height:1.5;margin:14px 0}.toggleline{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid #2c3043;font-size:14px}.toggle{appearance:none;width:44px;height:26px;background:#42465a;border-radius:30px;position:relative;cursor:pointer}.toggle:before{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;border-radius:50%;background:white;transition:.15s}.toggle:checked{background:var(--blue)}.toggle:checked:before{left:21px}.empty{text-align:center;padding:35px 12px;color:var(--muted)}.empty strong{display:block;color:var(--text);margin-bottom:6px}
 @media(min-width:600px){.app{padding-top:26px}.modalback{align-items:center}.modal{border-radius:28px}}
+  /* Ank mobile layout fix */
+@media (max-width: 600px) {
+  .app {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+    padding-bottom: 100px;
+    margin: 0 auto;
+  }
+
+  .top {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .greeting {
+    font-size: 24px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .sub {
+    font-size: 15px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .section-head {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .friends,
+  #rooms {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .friend,
+  .room {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  button {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .bottom {
+    width: calc(100% - 20px);
+    max-width: 500px;
+  }
+}
 </style>
 </head>
 <body>
