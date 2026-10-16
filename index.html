@@ -1399,8 +1399,7 @@ $("anki-account-form").addEventListener("submit", async event => {
       "auth/operation-not-allowed": "Email/password login is not enabled in Firebase.",
       "auth/network-request-failed": "Network error. Check your internet connection."
     };
-
-    message("Firebase error: " + error.code + " — " + error.message);Please try again.");
+message("Firebase error: " + error.code + " — " + error.message);
   } finally {
     $("anki-submit").disabled = false;
   }
