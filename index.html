@@ -1,138 +1,799 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<meta name="theme-color" content="#0b0b0f">
+<meta name="theme-color" content="#10090e">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Anki">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icons/anki-icon.svg">
-<title>Anki — Anime Social Voice Rooms</title>
+<title>Anki — Beyond the Walls</title>
+
 <style>
-:root{--bg:#11131d;--panel:#191c29;--panel2:#202437;--blue:#7457ff;--cyan:#c0a7ff;--text:#f5f6ff;--muted:#a4aac2;--green:#54d89b;--pink:#ff657b}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 90% -8%,#51131e 0,transparent 34%),radial-gradient(circle at 0% 20%,#301018 0,transparent 31%),radial-gradient(circle at 55% 70%,#17151c 0,transparent 45%),var(--bg);color:var(--text);font-family:"Nunito",ui-rounded,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input{font:inherit}button{cursor:pointer;border:0;color:inherit}.app{max-width:760px;margin:auto;min-height:100dvh;padding:18px 16px 100px}
-.top{display:flex;align-items:center;justify-content:space-between;padding:8px 2px 20px}.brand{font-family:"Space Grotesk","Nunito",sans-serif;font-weight:700;font-size:31px;letter-spacing:-1.4px;text-shadow:0 0 22px #ef334b44;display:flex;align-items:center;gap:1px}.brand span{color:transparent;font-size:0;letter-spacing:0;display:inline-block;width:18px;height:30px;position:relative;margin-left:1px;transform:rotate(-8deg);vertical-align:middle}.brand span:before{content:"";position:absolute;left:3px;top:3px;width:12px;height:24px;border-radius:4px 4px 7px 7px;background:linear-gradient(155deg,#ff7788 0%,#e42b45 55%,#9e1429 100%);clip-path:polygon(20% 0,100% 8%,90% 72%,58% 100%,0 83%);box-shadow:0 0 12px #ef334b55}.brand span:after{content:"";position:absolute;left:1px;top:12px;width:17px;height:6px;border-radius:2px;background:#0b0b0f;transform:rotate(-23deg);box-shadow:0 6px 0 -1px #0b0b0f.top-actions{display:flex;gap:10px}.iconbtn{width:42px;height:42px;border-radius:15px;background:var(--panel2);font-size:19px}
-.greeting{font-size:26px;font-weight:800;letter-spacing:-.8px;margin:5px 0}.sub{color:var(--muted);font-size:14px;margin:7px 0 20px}
-.statusbar{background:linear-gradient(110deg,#26151c,#1b171e);border:1px solid #48232d;border-radius:20px;padding:15px;display:flex;align-items:center;gap:12px;margin-bottom:24px}.avatar{width:48px;height:48px;border-radius:17px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,#7e1b2d,#302027);flex-shrink:0}.statuscopy{flex:1}.statuscopy b{display:block;font-size:14px}.statuscopy small{color:var(--muted)}.pill{background:#263d2e;color:#9ce7b5;border-radius:30px;padding:7px 10px;font-size:12px}
-.section-head{display:flex;align-items:center;justify-content:space-between;margin:25px 0 12px}.section-head h2{font-size:18px;margin:0}.link{background:transparent;color:#9eacff;font-size:13px}
-.friends{display:flex;gap:15px;overflow:auto;padding:3px 0 8px}.friend{min-width:75px;text-align:center}.friend .avatar{margin:0 auto 7px;width:61px;height:61px;border-radius:22px;font-size:28px;position:relative}.online:after{content:"";position:absolute;right:1px;bottom:1px;width:11px;height:11px;border:2px solid var(--bg);border-radius:50%;background:var(--green)}.friend b{font-size:12px}.friend small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
-.room{display:flex;gap:13px;align-items:center;background:linear-gradient(115deg,#21151b,#17151b);border:1px solid #3c252e;border-radius:22px;padding:15px;margin:10px 0}.roomicon{width:58px;height:58px;border-radius:18px;background:linear-gradient(135deg,#8e1d32,#30151f);display:grid;place-items:center;font-size:26px}.roominfo{flex:1;min-width:0}.roominfo b{display:block;font-size:15px}.roominfo small{display:block;color:var(--muted);margin-top:5px;font-size:12px}.live{color:#ff8794;font-size:11px;font-weight:800;margin-right:4px}.join{background:linear-gradient(135deg,#ef334b,#a91831);box-shadow:0 5px 18px #ef334b33;border-radius:14px;padding:11px 14px;font-size:13px;font-weight:750}.create{width:100%;padding:15px;border-radius:17px;background:linear-gradient(110deg,#32121c,#1b171d);border:1px dashed #a6374b;color:#b7c1ff;font-weight:700;margin-top:8px}
-.card{background:linear-gradient(135deg,rgba(35,22,28,.98),rgba(21,19,24,.98));border:1px solid #482630;border-radius:22px;padding:17px;margin-top:22px}.card h3{margin:0 0 7px;font-size:16px}.card p{color:var(--muted);font-size:13px;line-height:1.5;margin:0}
-.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,760px);padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(0deg,#11131d 75%,transparent);z-index:4}.nav{display:flex;justify-content:space-around;background:#08080b;border:1px solid #3a2229;border-radius:23px;padding:9px 6px}.nav button{background:transparent;color:var(--muted);padding:7px 20px;border-radius:16px;font-size:12px;font-weight:700}.nav button.active{background:#252b4c;color:#aebaff}.nav em{display:block;font-style:normal;font-size:20px;margin-bottom:3px}
-.page{display:none}.page.active{display:block}
-.modalback{position:fixed;inset:0;background:#0009;z-index:10;display:none;align-items:flex-end;justify-content:center}.modalback.show{display:flex}.modal{width:min(100%,600px);background:#191c29;border:1px solid #343951;border-radius:28px 28px 0 0;padding:22px 18px calc(24px + env(safe-area-inset-bottom));max-height:88dvh;overflow:auto}.modalhead{display:flex;justify-content:space-between;align-items:center}.modal h2{margin:0;font-size:21px}.close{background:#2a2e40;border-radius:12px;width:38px;height:38px;font-size:21px}.field{display:block;margin:16px 0 6px;color:var(--muted);font-size:12px}.input{width:100%;background:#11191e;border:1px solid #3b4d55;border-radius:14px;padding:13px;color:var(--text);outline:none}.primary{width:100%;background:var(--blue);border-radius:15px;padding:14px;font-weight:800;margin-top:15px}.roomhero{text-align:center;padding:22px 0 14px}.roomhero .avatar{width:84px;height:84px;margin:auto;border-radius:28px;font-size:38px}.roomhero h2{margin:12px 0 5px}.roomhero p{margin:0;color:var(--muted);font-size:13px}.participants{display:flex;justify-content:center;gap:15px;margin:20px 0}.participant{text-align:center;font-size:11px;color:var(--muted)}.participant .avatar{width:52px;height:52px;margin:0 auto 6px;font-size:24px}
-.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.control{background:#292e42;border-radius:17px;padding:14px 5px;font-size:12px}.control span{display:block;font-size:22px;margin-bottom:6px}.control.on{background:#3b5338;color:#e1efd6}.control.danger{background:#8d2f43}.notice{border:1px solid #5a5335;background:#302b1c;color:#f3dba1;border-radius:15px;padding:12px;font-size:12px;line-height:1.5;margin:14px 0}.toggleline{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid #2c3043;font-size:14px}.toggle{appearance:none;width:44px;height:26px;background:#42465a;border-radius:30px;position:relative;cursor:pointer}.toggle:before{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;border-radius:50%;background:white;transition:.15s}.toggle:checked{background:var(--blue)}.toggle:checked:before{left:21px}.empty{text-align:center;padding:35px 12px;color:var(--muted)}.empty strong{display:block;color:var(--text);margin-bottom:6px}
-@media(min-width:600px){.app{padding-top:26px}.modalback{align-items:center}.modal{border-radius:28px}}
-  /* Ank mobile layout fix */
-@media (max-width: 600px) {
-  .app {
-    width: 100%;
-    max-width: 100%;
-    padding: 16px;
-    padding-bottom: 100px;
-    margin: 0 auto;
-  }
+:root {
+  --bg:#10090e;
+  --panel:#1c1119;
+  --line:#512633;
+  --red:#e52b4f;
+  --pink:#ff91a7;
+  --text:#fff5f7;
+  --muted:#b8a8b1;
+  --blue:#a3adff;
+}
 
-  .top {
-    gap: 12px;
-    flex-wrap: wrap;
-  }
+* { box-sizing:border-box; }
 
-  .greeting {
-    font-size: 24px;
-    line-height: 1.35;
-    overflow-wrap: anywhere;
-  }
+body {
+  margin:0;
+  background:
+    radial-gradient(ellipse at top right,#461226 0%,transparent 48%),
+    var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  overflow-x:hidden;
+}
 
-  .sub {
-    font-size: 15px;
-    line-height: 1.5;
-    overflow-wrap: anywhere;
-  }
+button,input,textarea { font:inherit; }
+button { cursor:pointer; }
 
-  .section-head {
-    gap: 10px;
-    flex-wrap: wrap;
-  }
+.app {
+  width:100%;
+  max-width:700px;
+  margin:auto;
+  padding:20px 17px 110px;
+}
 
-  .friends,
-  #rooms {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
+header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:12px 0 38px;
+}
 
-  .friend,
-  .room {
-    min-width: 0;
-    overflow-wrap: anywhere;
-  }
+.brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
 
-  button {
-    max-width: 100%;
-    white-space: normal;
-  }
+.scarf-logo {
+  font-size:37px;
+  line-height:1;
+}
 
-  .bottom {
-    width: calc(100% - 20px);
-    max-width: 500px;
-  }
+.brand-name {
+  font-size:31px;
+  font-weight:900;
+  letter-spacing:-1.5px;
+}
+
+.brand-name span { color:var(--pink); }
+
+.actions { display:flex;gap:9px; }
+
+.icon-btn {
+  width:47px;
+  height:47px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#ffffff08;
+  color:white;
+  font-size:22px;
+}
+
+.eyebrow {
+  color:var(--pink);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:3px;
+  line-height:1.6;
+  text-transform:uppercase;
+}
+
+.hero h1 {
+  font-size:clamp(38px,9vw,54px);
+  line-height:1.05;
+  letter-spacing:-2px;
+  margin:15px 0;
+}
+
+.hero h1 span { color:var(--pink); }
+
+.hero p,.description {
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.6;
+}
+
+.pills {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:22px 0 28px;
+}
+
+.pill {
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:11px 14px;
+  font-size:13px;
+  font-weight:750;
+}
+
+.feature {
+  display:flex;
+  align-items:center;
+  gap:17px;
+  padding:22px 16px;
+  margin:25px 0;
+  border:1px solid #63404d;
+  border-radius:26px;
+  background:linear-gradient(130deg,#1b3436,#2a1421 85%);
+  position:relative;
+  overflow:hidden;
+}
+
+.feature:after {
+  content:"";
+  position:absolute;
+  height:4px;
+  left:30%;
+  right:0;
+  bottom:0;
+  background:linear-gradient(90deg,transparent,var(--red));
+}
+
+.wings {
+  flex:0 0 100px;
+  width:100px;
+  height:125px;
+  display:block;
+}
+
+.feature-copy { min-width:0; }
+
+.feature h2 {
+  font-size:clamp(19px,5vw,26px);
+  line-height:1.2;
+  margin:10px 0;
+}
+
+.feature p {
+  color:#e2d5db;
+  font-size:14px;
+  line-height:1.55;
+  margin:0;
+}
+
+.status {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:#ffffff04;
+  margin:25px 0 35px;
+}
+
+.status-icon {
+  flex:0 0 52px;
+  height:52px;
+  border-radius:17px;
+  display:grid;
+  place-items:center;
+  background:#512035;
+  color:var(--pink);
+  font-size:25px;
+}
+
+.status-copy { flex:1;min-width:0; }
+
+.status-copy strong {
+  display:block;
+  margin-bottom:6px;
+}
+
+.status-copy span {
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.4;
+}
+
+.soft-btn {
+  background:#214638;
+  color:#b8ffd7;
+  border:0;
+  border-radius:30px;
+  padding:11px 13px;
+  font-size:13px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.section-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:30px 0 15px;
+}
+
+.section-head h2 { font-size:23px;margin:0; }
+
+.text-btn {
+  border:0;
+  background:none;
+  color:var(--blue);
+  font-weight:800;
+  padding:8px 0;
+}
+
+.friends {
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+}
+
+.friend {
+  width:76px;
+  text-align:center;
+  overflow-wrap:anywhere;
+}
+
+.avatar {
+  width:68px;
+  height:68px;
+  border:1px solid #633146;
+  border-radius:22px;
+  background:linear-gradient(145deg,#63253b,#251520);
+  display:grid;
+  place-items:center;
+  margin:0 auto 8px;
+  font-size:25px;
+}
+
+.friend small {
+  color:var(--muted);
+  font-size:12px;
+}
+
+.add-avatar {
+  background:#ffffff05;
+  color:var(--pink);
+  border:1px dashed #8a4258;
+  font-size:32px;
+}
+
+.page { display:none; }
+.page.active { display:block; }
+
+.page-title {
+  font-size:35px;
+  letter-spacing:-1px;
+  margin:8px 0;
+}
+
+.form,.room {
+  padding:16px;
+  margin:14px 0;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:#ffffff04;
+}
+
+label {
+  display:block;
+  color:var(--muted);
+  font-size:13px;
+  margin:12px 0 7px;
+}
+
+input,textarea {
+  width:100%;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#120c11;
+  color:white;
+}
+
+textarea { min-height:90px; }
+
+.primary {
+  border:0;
+  border-radius:13px;
+  padding:12px 15px;
+  margin-top:12px;
+  background:var(--red);
+  color:white;
+  font-weight:800;
+}
+
+.form .primary { width:100%; }
+
+.room {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.room-icon {
+  flex:0 0 45px;
+  width:45px;
+  height:45px;
+  border-radius:14px;
+  background:#351a28;
+  display:grid;
+  place-items:center;
+  font-size:22px;
+}
+
+.room-info { flex:1;min-width:0; }
+
+.room-info strong { display:block;font-size:14px; }
+
+.room-info small {
+  display:block;
+  color:var(--muted);
+  margin-top:5px;
+  line-height:1.4;
+}
+
+.note {
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.bottom-nav {
+  position:fixed;
+  z-index:10;
+  left:0;
+  right:0;
+  bottom:0;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 5px calc(10px + env(safe-area-inset-bottom));
+  background:#10090ef2;
+  backdrop-filter:blur(18px);
+  border-top:1px solid #6b35444d;
+}
+
+.bottom-nav button {
+  min-width:55px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  background:none;
+  border:0;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:750;
+}
+
+.bottom-nav b { font-size:22px;font-weight:500; }
+.bottom-nav button.active { color:var(--pink); }
+
+#toast {
+  display:none;
+  position:fixed;
+  z-index:20;
+  bottom:90px;
+  left:50%;
+  transform:translateX(-50%);
+  width:max-content;
+  max-width:90%;
+  padding:13px 16px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#2b1721;
+  font-size:13px;
+  text-align:center;
+}
+
+@media(max-width:380px) {
+  .app { padding-left:13px;padding-right:13px; }
+  .feature { gap:10px;padding:16px 11px; }
+  .wings { flex-basis:76px;width:76px;height:100px; }
+  .status { gap:8px;padding:12px; }
+  .status-icon { flex-basis:44px;height:44px; }
+  .soft-btn { padding:9px 10px; }
 }
 </style>
 </head>
+
 <body>
-<div class="app">
-  <header class="top"><div class="brand">Ank<span aria-label="Mikasa scarf logo">i</span></div><div class="top-actions"><button class="iconbtn" aria-label="Friends" onclick="showPage('friends')">♧</button><button class="iconbtn" aria-label="Settings" onclick="openSettings()">⚙</button></div></header>
-  <main>
-    <section class="page active" id="home">
-      <div class="greeting">Beyond the walls. Together.</div><div class="sub">Eren’s resolve. Mikasa’s strength. Your squad.</div><div class="card" style="margin-top:0;padding:0;overflow:hidden;border-color:#5b3946;background:linear-gradient(110deg,#173f43 0%,#24313b 48%,#572633 100%)"><div style="padding:17px 17px 15px;display:flex;align-items:center;gap:14px"><div style="font-size:38px;filter:drop-shadow(0 4px 8px #0006)">🧣</div><div style="flex:1"><div style="font-size:10px;letter-spacing:2px;color:#ff9aa7;font-weight:900">SCOUT REGIMENT</div><h3 style="margin:5px 0 4px;font-size:18px">Beyond the walls.</h3><p style="font-size:12px;color:#e6d7dc">Eren’s resolve × Mikasa’s scarf</p></div><div style="font-size:30px;filter:drop-shadow(0 0 10px #ef334b55)">🧣</div></div><div style="height:4px;background:linear-gradient(90deg,#111 0 50%,#ef334b 50% 100%)"></div></div>
-      <div class="statusbar"><div class="avatar">🌀</div><div class="statuscopy"><b>Your status</b><small id="statusText">Available to hang out</small></div><button class="pill" onclick="cycleStatus()">Change</button></div>
-      <div class="section-head"><h2>Friends around</h2><button class="link" onclick="showPage('friends')">See all →</button></div>
-      <div class="friends" id="friendStrip">
-        <div class="friend"><div class="avatar online">🦊</div><b>Anki</b><small>Scrolling</small></div>
-        <div class="friend"><div class="avatar online">🎧</div><b>Hegde</b><small>At home</small></div>
-        <div class="friend"><div class="avatar">🐼</div><b>Mira</b><small>Offline</small></div>
-        <div class="friend"><div class="avatar online">🐸</div><b>Dev</b><small>Scout Training</small></div>
-        <div class="friend"><div class="avatar">＋</div><b>Add friend</b><small>Invite someone</small></div>
-      </div>
-      <div class="section-head"><h2>Voice rooms</h2><button class="link" onclick="openCreate()">＋ Create</button></div>
-      <div id="rooms">
-        <div class="room"><div class="roomicon">🎮</div><div class="roominfo"><b>Shinobi Squad</b><small><span class="live">● LIVE</span> 4 talking · Gaming</small></div><button class="join" onclick="joinRoom('Shinobi Squad','🎮')">Join</button></div>
-        <div class="room"><div class="roomicon">☁️</div><div class="roominfo"><b>Anime After Hours</b><small>2 people · Just vibing</small></div><button class="join" onclick="joinRoom('Anime After Hours','☁️')">Join</button></div>
-        <div class="room"><div class="roomicon">🎵</div><div class="roominfo"><b>Opening Theme Lounge</b><small>3 people · Music</small></div><button class="join" onclick="joinRoom('Opening Theme Lounge','🎵')">Join</button></div>
-      </div>
-      <button class="create" onclick="openCreate()">＋ Create your own room</button>
-      <div class="card"><h3>🎮 Game audio + voice chat</h3><p>Anki is designed around a “game audio first” setting. The prototype previews the controls; a production build needs native iOS/Android audio-session configuration and a real-time voice SDK to make mixing work reliably.</p></div>
-    </section>
-    <section class="page" id="friends"><div class="greeting">Your circle</div><div class="sub">Keep your favourite people close.</div><div class="card"><h3>＋ Add a friend</h3><p>Use a username or invite code to connect with people you know.</p><input class="input" id="friendInput" placeholder="Enter username or invite code"><button class="primary" onclick="addFriend()">Send friend request</button></div><div id="friendResult"></div></section>
-    <section class="page" id="chat"><div class="greeting">Messages</div><div class="sub">Conversations that continue after the call.</div><div class="room" onclick="alert('Demo chat: messaging requires a connected backend.')"><div class="avatar">🦊</div><div class="roominfo"><b>Anki</b><small>That match was wild 😂</small></div><small>Now</small></div><div class="room" onclick="alert('Demo chat: messaging requires a connected backend.')"><div class="avatar">🎧</div><div class="roominfo"><b>Hegde</b><small>Join the room?</small></div><small>12m</small></div><div class="card"><h3>Private by design</h3><p>Message requests and block/report controls should be included before public launch.</p></div></section>
-    <section class="page" id="profile"><div class="greeting">Your profile</div><div class="sub">Make your space yours.</div><div class="card" style="text-align:center"><div class="avatar" style="margin:auto;width:80px;height:80px;font-size:36px">🦉</div><h3 style="margin-top:12px">Your Anki</h3><p>@yourusername · Level 1</p><button class="primary" onclick="openSettings()">Edit preferences</button></div><div class="card"><h3>Account & safety</h3><p>Privacy, blocked users, notification settings, and account controls.</p></div></section>
-  </main>
-</div>
-<nav class="bottom"><div class="nav"><button class="active" data-page="home" onclick="showPage('home')"><em>⌂</em>Home</button><button data-page="chat" onclick="showPage('chat')"><em>▢</em>Chat</button><button data-page="friends" onclick="showPage('friends')"><em>♧</em>Friends</button><button data-page="profile" onclick="showPage('profile')"><em>◉</em>Profile</button></div></nav>
-<div class="modalback" id="roomModal"><div class="modal"><div class="modalhead"><h2 id="roomTitle">Voice room</h2><button class="close" onclick="closeModal('roomModal')">×</button></div><div class="roomhero"><div class="avatar" id="roomEmoji">🎮</div><h2 id="roomHeading">Shinobi Squad</h2><p>You're in the room · Demo mode</p></div><div class="participants"><div class="participant"><div class="avatar">🦊</div>Anki</div><div class="participant"><div class="avatar">🎧</div>Hegde</div><div class="participant"><div class="avatar">🐸</div>Dev</div><div class="participant"><div class="avatar">🦉</div>You</div></div><div class="controls"><button class="control on" id="micBtn" onclick="toggleControl('micBtn','🎙️','Mic on','🔇','Mic muted')"><span>🎙️</span>Mic on</button><button class="control on" id="audioBtn" onclick="toggleControl('audioBtn','🔊','Speaker on','🔈','Speaker off')"><span>🔊</span>Speaker on</button><button class="control" id="gameBtn" onclick="toggleGameAudio()"><span>🎮</span>Game audio</button></div><div class="notice"><b>Audio note:</b> This demo cannot change your phone's audio routing. In the real app, “Mix game audio” must be implemented with native audio settings and tested with each game/device.</div><button class="primary" style="background:#a8324d" onclick="closeModal('roomModal')">Leave room</button></div></div>
-<div class="modalback" id="createModal"><div class="modal"><div class="modalhead"><h2>Create a room</h2><button class="close" onclick="closeModal('createModal')">×</button></div><label class="field">Room name</label><input class="input" id="newRoomName" maxlength="32" placeholder="e.g. Squad after class"><label class="field">Room type</label><select class="input" id="newRoomType"><option>Gaming</option><option>Anime After Hours</option><option>Study room</option><option>Music</option></select><label class="field">Who can join?</label><select class="input" id="newRoomPrivacy"><option selected>Friends only</option><option>Invite only</option></select><button class="primary" onclick="createRoom()">Create room</button></div></div>
-<div class="modalback" id="settingsModal"><div class="modal"><div class="modalhead"><h2>Audio & app settings</h2><button class="close" onclick="closeModal('settingsModal')">×</button></div><div class="notice">These are prototype preferences. They do not change iOS or Android system audio settings yet.</div><div class="toggleline">Prioritize game audio <input type="checkbox" class="toggle" checked></div><div class="toggleline">Reduce voice ducking <input type="checkbox" class="toggle" checked></div><div class="toggleline">Noise suppression <input type="checkbox" class="toggle" checked></div><div class="toggleline">Echo cancellation <input type="checkbox" class="toggle" checked></div><div class="toggleline">Push-to-talk <input type="checkbox" class="toggle"></div><div class="toggleline">Friend activity alerts <input type="checkbox" class="toggle" checked></div><button class="primary" onclick="closeModal('settingsModal')">Save preferences</button></div></div>
+<main class="app">
+
+<header>
+  <div class="brand">
+    <span class="scarf-logo" aria-label="Mikasa scarf">🧣</span>
+    <div class="brand-name">Ank<span>i</span></div>
+  </div>
+
+  <div class="actions">
+    <button class="icon-btn" onclick="showPage('friends')" aria-label="Friends">♧</button>
+    <button class="icon-btn" onclick="showPage('profile')" aria-label="Settings">⚙</button>
+  </div>
+</header>
+
+<section id="home" class="page active">
+
+  <div class="hero">
+    <div class="eyebrow">Your people. Your world.</div>
+    <h1>Beyond the walls.<br><span>Together.</span></h1>
+    <p>Eren’s resolve. Mikasa’s strength. Your squad.</p>
+    <div class="pills">
+      <span class="pill">✦ Anime community</span>
+      <span class="pill">♡ Friends first</span>
+    </div>
+  </div>
+
+  <section class="feature">
+
+    <!-- Wings of Freedom-inspired emblem drawn directly in SVG -->
+    <svg class="wings" viewBox="0 0 120 140"
+         role="img" aria-label="Wings of Freedom emblem">
+      <g fill="none" stroke="#f7f5fa" stroke-width="3">
+        <path d="M19 24 L19 12 L42 12 M78 12 L101 12 L101 24"/>
+        <path d="M19 30 L19 108 L60 130 L101 108 L101 30"/>
+      </g>
+
+      <!-- Blue wing -->
+      <g fill="#236bb5" stroke="#0b101b" stroke-width="1.5">
+        <path d="M55 25 L34 4 L42 31 L59 44 Z"/>
+        <path d="M55 43 L27 22 L36 47 L59 59 Z"/>
+        <path d="M57 59 L22 42 L32 65 L61 76 Z"/>
+        <path d="M59 76 L23 62 L36 84 L63 92 Z"/>
+        <path d="M61 92 L34 82 L46 102 L65 108 Z"/>
+        <path d="M64 108 L49 102 L60 119 L69 116 Z"/>
+      </g>
+
+      <!-- White wing -->
+      <g fill="#fffaff" stroke="#111019" stroke-width="1.5">
+        <path d="M65 25 L87 4 L78 31 L61 44 Z"/>
+        <path d="M65 43 L93 22 L84 47 L61 59 Z"/>
+        <path d="M63 59 L98 42 L88 65 L59 76 Z"/>
+        <path d="M61 76 L97 62 L84 84 L57 92 Z"/>
+        <path d="M59 92 L86 82 L74 102 L55 108 Z"/>
+        <path d="M56 108 L71 102 L60 119 L51 116 Z"/>
+      </g>
+
+      <path d="M60 18 L60 122" stroke="#f8f5fb"
+            stroke-width="2" fill="none"/>
+    </svg>
+
+    <div class="feature-copy">
+      <div class="eyebrow">A little symbol. A lot of meaning.</div>
+      <h2>Keep your people close.</h2>
+      <p>Your own corner of the world, made for your crew.</p>
+    </div>
+
+  </section>
+
+  <section class="status">
+    <div class="status-icon">◉</div>
+    <div class="status-copy">
+      <strong>Your status</strong>
+      <span id="statusText">Available to hang out</span>
+    </div>
+    <button class="soft-btn" onclick="cycleStatus()">Change</button>
+  </section>
+
+  <div class="section-head">
+    <h2>Friends around</h2>
+    <button class="text-btn" onclick="showPage('friends')">See all →</button>
+  </div>
+
+  <div id="homeFriends" class="friends"></div>
+
+  <div class="section-head">
+    <h2>Squad rooms</h2>
+    <button class="text-btn" onclick="showPage('chat')">Explore →</button>
+  </div>
+
+  <div id="homeRooms"></div>
+
+  <p class="note">
+    Anki prototype. Friends and rooms are stored in this browser.
+    Real online accounts, messaging and voice calls require a backend.
+  </p>
+</section>
+
+<section id="chat" class="page">
+  <h1 class="page-title">Squad spaces</h1>
+  <p class="description">Create a room for your crew.</p>
+
+  <div class="form">
+    <label for="roomName">New room name</label>
+    <input id="roomName" maxlength="40"
+           placeholder="Late-night anime chat">
+    <button class="primary" onclick="createRoom()">+ Create room</button>
+  </div>
+
+  <div id="allRooms"></div>
+  <p class="note">Joining a room is a demo action, not a live voice call.</p>
+</section>
+
+<section id="friends" class="page">
+  <h1 class="page-title">Your squad</h1>
+  <p class="description">Your people, your world.</p>
+
+  <div class="form">
+    <label for="friendName">Friend display name</label>
+    <input id="friendName" maxlength="24" placeholder="Enter a name">
+    <button class="primary" onclick="addFriend()">Add friend</button>
+  </div>
+
+  <div id="allFriends" class="friends"></div>
+</section>
+
+<section id="profile" class="page">
+  <h1 class="page-title">Your profile</h1>
+  <p class="description">Make your corner of the world yours.</p>
+
+  <div class="form">
+    <label for="displayName">Display name</label>
+    <input id="displayName" maxlength="24" value="Scout">
+
+    <label for="bioText">About you</label>
+    <textarea id="bioText" maxlength="180"
+              placeholder="Your story starts here..."></textarea>
+
+    <button class="primary" onclick="saveProfile()">Save profile</button>
+    <p class="note">Profile data is saved on this device only.</p>
+  </div>
+</section>
+
+</main>
+
+<nav class="bottom-nav" aria-label="Main navigation">
+  <button class="active" data-page="home" onclick="showPage('home')">
+    <b>⌂</b>Home
+  </button>
+  <button data-page="chat" onclick="showPage('chat')">
+    <b>▢</b>Chat
+  </button>
+  <button data-page="friends" onclick="showPage('friends')">
+    <b>♧</b>Friends
+  </button>
+  <button data-page="profile" onclick="showPage('profile')">
+    <b>◉</b>Profile
+  </button>
+</nav>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
 <script>
-const statusOptions=['Available to hang out','Gaming right now','Busy — ping later','Just chilling'];
-let statusIndex=0,gameOn=false;
-function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'})}
-function openCreate(){document.getElementById('createModal').classList.add('show')}
-function openSettings(){document.getElementById('settingsModal').classList.add('show')}
-function closeModal(id){document.getElementById(id).classList.remove('show')}
-function joinRoom(name,emoji){document.getElementById('roomTitle').textContent=name;document.getElementById('roomHeading').textContent=name;document.getElementById('roomEmoji').textContent=emoji;document.getElementById('roomModal').classList.add('show')}
-function cycleStatus(){statusIndex=(statusIndex+1)%statusOptions.length;document.getElementById('statusText').textContent=statusOptions[statusIndex]}
-function toggleControl(id,onEmoji,onText,offEmoji,offText){let b=document.getElementById(id),on=!b.classList.contains('on');b.classList.toggle('on',on);b.innerHTML='<span>'+(on?onEmoji:offEmoji)+'</span>'+(on?onText:offText)}
-function toggleGameAudio(){gameOn=!gameOn;let b=document.getElementById('gameBtn');b.classList.toggle('on',gameOn);b.innerHTML='<span>'+(gameOn?'🎮':'🔇')+'</span>'+(gameOn?'Mix game audio':'Game audio off');}
-function createRoom(){let name=document.getElementById('newRoomName').value.trim();if(!name){alert('Please enter a room name.');return}let type=document.getElementById('newRoomType').value;let emoji=type==='Gaming'?'🎮':type==='Music'?'🎵':type==='Study room'?'📚':'☁️';let div=document.createElement('div');div.className='room';let safeName=name.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));div.innerHTML='<div class="roomicon">'+emoji+'</div><div class="roominfo"><b>'+safeName+'</b><small>Friends-only · '+type+'</small></div><button class="join">Join</button>';div.querySelector('button').onclick=()=>joinRoom(name,emoji);document.getElementById('rooms').prepend(div);closeModal('createModal');document.getElementById('newRoomName').value='';joinRoom(name,emoji)}
-function addFriend(){let v=document.getElementById('friendInput').value.trim();if(!v){alert('Enter a username or invite code first.');return}document.getElementById('friendResult').innerHTML='<div class="card"><h3>Request ready</h3><p>Demo only: friend request to <b></b> would be sent once accounts and a backend are connected.</p></div>';document.querySelector('#friendResult b').textContent=v}
-document.querySelectorAll('.modalback').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
+const defaultFriends = [
+  {name:"Mikasa",icon:"🧣"},
+  {name:"Armin",icon:"✦"}
+];
+
+const defaultRooms = [
+  {
+    name:"Beyond the Walls",
+    detail:"Anime · chill · meet your squad",
+    icon:"⚔️",
+    members:3
+  },
+  {
+    name:"Midnight Scouts",
+    detail:"Late-night talks and music",
+    icon:"🌙",
+    members:2
+  }
+];
+
+function loadData(key, fallback) {
+  try {
+    const saved = localStorage.getItem(key);
+    return saved ? JSON.parse(saved) : fallback;
+  } catch (e) {
+    return fallback;
+  }
+}
+
+function saveData(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {}
+}
+
+let friends = loadData("anki-friends", defaultFriends);
+let rooms = loadData("anki-rooms", defaultRooms);
+let statusIndex = 0;
+
+const statuses = [
+  "Available to hang out",
+  "Watching anime",
+  "Busy on a mission",
+  "Taking a quiet break"
+];
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[char]);
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+
+  clearTimeout(showToast.timer);
+
+  showToast.timer = setTimeout(() => {
+    toast.style.display = "none";
+  }, 2400);
+}
+
+function showPage(pageId) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.toggle("active", page.id === pageId);
+  });
+
+  document.querySelectorAll(".bottom-nav button").forEach(button => {
+    button.classList.toggle("active", button.dataset.page === pageId);
+  });
+
+  window.scrollTo({top:0, behavior:"smooth"});
+
+  renderFriends();
+  renderRooms();
+}
+
+function cycleStatus() {
+  statusIndex = (statusIndex + 1) % statuses.length;
+  document.getElementById("statusText").textContent =
+    statuses[statusIndex];
+
+  showToast("Status updated");
+}
+
+function friendCard(friend, index, removable = false) {
+  return `
+    <div class="friend">
+      <div class="avatar">${escapeHTML(friend.icon || "✦")}</div>
+      <small>${escapeHTML(friend.name)}</small>
+      ${removable
+        ? `<button class="text-btn"
+             onclick="removeFriend(${index})">Remove</button>`
+        : ""}
+    </div>
+  `;
+}
+
+function renderFriends() {
+  const home = document.getElementById("homeFriends");
+  const all = document.getElementById("allFriends");
+
+  home.innerHTML =
+    friends.map((friend, index) => friendCard(friend, index)).join("") +
+    `<button class="friend" onclick="showPage('friends')"
+       style="border:0;background:none;color:inherit">
+       <span class="avatar add-avatar">+</span>
+       <small>Add friend</small>
+     </button>`;
+
+  all.innerHTML = friends.length
+    ? friends.map((friend, index) =>
+        friendCard(friend, index, true)).join("")
+    : `<p class="note">Your squad is waiting. Add your first friend above.</p>`;
+}
+
+function addFriend() {
+  const input = document.getElementById("friendName");
+  const name = input.value.trim();
+
+  if (!name) {
+    showToast("Enter a name first");
+    input.focus();
+    return;
+  }
+
+  if (friends.some(friend =>
+      friend.name.toLowerCase() === name.toLowerCase())) {
+    showToast("That name is already in your squad");
+    return;
+  }
+
+  friends.push({name:name, icon:"✦"});
+  saveData("anki-friends", friends);
+
+  input.value = "";
+  renderFriends();
+  showToast(name + " added");
+}
+
+function removeFriend(index) {
+  friends.splice(index, 1);
+  saveData("anki-friends", friends);
+  renderFriends();
+  showToast("Friend removed");
+}
+
+function roomCard(room, index) {
+  return `
+    <article class="room">
+      <div class="room-icon">${escapeHTML(room.icon || "⚔️")}</div>
+      <div class="room-info">
+        <strong>${escapeHTML(room.name)}</strong>
+        <small>${escapeHTML(room.detail || "Your squad room")}
+          · ${Number(room.members) || 1} here</small>
+      </div>
+      <button class="primary" onclick="joinRoom(${index})">Join</button>
+    </article>
+  `;
+}
+
+function renderRooms() {
+  const content = rooms.map(roomCard).join("") ||
+    `<p class="note">No rooms yet. Create one above.</p>`;
+
+  document.getElementById("homeRooms").innerHTML = content;
+  document.getElementById("allRooms").innerHTML = content;
+}
+
+function joinRoom(index) {
+  if (rooms[index]) {
+    showToast("Joined " + rooms[index].name + " — demo room");
+  }
+}
+
+function createRoom() {
+  const input = document.getElementById("roomName");
+  const name = input.value.trim();
+
+  if (!name) {
+    showToast("Give your room a name first");
+    input.focus();
+    return;
+  }
+
+  rooms.unshift({
+    name:name,
+    detail:"Your own squad room",
+    icon:"⚔️",
+    members:1
+  });
+
+  saveData("anki-rooms", rooms);
+  input.value = "";
+  renderRooms();
+  showToast("Room created on this device");
+}
+
+function saveProfile() {
+  const name =
+    document.getElementById("displayName").value.trim() || "Scout";
+  const bio = document.getElementById("bioText").value.trim();
+
+  saveData("anki-profile", {name:name, bio:bio});
+  showToast("Profile saved on this device");
+}
+
+(function init() {
+  const profile = loadData("anki-profile", null);
+
+  if (profile) {
+    document.getElementById("displayName").value =
+      profile.name || "Scout";
+
+    document.getElementById("bioText").value =
+      profile.bio || "";
+  }
+
+  renderFriends();
+  renderRooms();
+})();
 </script>
-<script>if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {})); }</script>
 </body>
 </html>
