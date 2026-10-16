@@ -9,9 +9,10 @@
 <style>
 :root {
   --bg: #0a080d;
-  --panel: #151119;
+  --panel: #171119;
   --pink: #f28ba5;
-  --border: #382934;
+  --pink-dark: #a51d43;
+  --border: #49303e;
   --muted: #aaa1ad;
   --white: #fff8fc;
 }
@@ -24,9 +25,9 @@ body {
   margin: 0;
   color: var(--white);
   background:
-    radial-gradient(ellipse at 50% 25%, #26101d 0%, transparent 48%),
+    radial-gradient(ellipse at 50% 20%, #32132255, transparent 50%),
     var(--bg);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   padding-bottom: calc(100px + env(safe-area-inset-bottom));
 }
 
@@ -42,111 +43,109 @@ button {
   width: 100%;
   max-width: 1000px;
   margin: auto;
-  padding: 20px 32px;
+  padding: 22px 32px;
 }
 
-/* HEADER — MATCHING YOUR SECOND SCREENSHOT */
+/* ANKI HEADER */
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 14px;
   margin-bottom: 32px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 18px;
   min-width: 0;
 }
 
 .brand-logo {
-  width: 140px;
-  height: 140px;
+  width: 86px;
+  height: 86px;
   flex-shrink: 0;
-  display: grid;
-  place-items: center;
   overflow: hidden;
-  border: 2px solid #49303e;
-  border-radius: 38px;
-  background: #050407;
+  border: 1px solid #633047;
+  border-radius: 27px;
+  background: #120a11;
+  box-shadow: 0 0 24px #e54e7920;
 }
 
 .brand-logo img {
-  display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-}
-
-.brand-text {
-  min-width: 0;
+  display: block;
+  object-fit: cover;
 }
 
 .brand-name {
   margin: 0;
-  color: #fff8fc;
-  font-size: 76px;
-  line-height: 1.1;
-  font-weight: 900;
-  letter-spacing: -3px;
+  font-size: 52px;
+  line-height: 1.05;
+  font-weight: 950;
+  letter-spacing: -2px;
+  background: linear-gradient(120deg, #fff8fc, #f28ba5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .brand-tagline {
-  margin: 20px 0 0;
-  color: #aaa1ad;
-  font-size: 30px;
-  line-height: 1.3;
-  white-space: nowrap;
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  letter-spacing: .2px;
 }
 
 .header-actions {
   display: flex;
-  gap: 28px;
+  gap: 12px;
 }
 
 .icon-button {
-  width: 126px;
-  height: 126px;
+  width: 52px;
+  height: 52px;
   flex-shrink: 0;
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: 50%;
+  background: #171119;
   color: white;
-  background: #151119;
-  font-size: 48px;
+  font-size: 24px;
 }
 
 /* HERO */
 
 .hero {
   padding: 34px;
+  margin-bottom: 26px;
   border: 1px solid #573043;
   border-radius: 34px;
   background:
-    radial-gradient(ellipse at 85% 15%, #64162b30, transparent 45%),
+    radial-gradient(ellipse at 90% 10%, #721a3933, transparent 50%),
     linear-gradient(140deg, #1d131d, #100c13);
-  margin-bottom: 26px;
 }
 
 .hero-label {
   display: inline-block;
+  padding: 11px 16px;
   color: var(--pink);
-  background: #f28ba511;
   border: 1px solid #633448;
   border-radius: 100px;
-  padding: 11px 16px;
-  font-size: 13px;
-  font-weight: 850;
-  letter-spacing: 1.4px;
+  background: #f28ba511;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
 }
 
 .hero h2 {
   margin: 28px 0 18px;
-  font-size: clamp(35px, 6vw, 54px);
-  line-height: 1.1;
+  font-size: clamp(38px, 6vw, 58px);
+  line-height: 1.08;
   letter-spacing: -2px;
+  font-weight: 900;
 }
 
 .hero h2 span {
@@ -168,22 +167,22 @@ button {
 
 .primary-button,
 .secondary-button {
-  min-height: 50px;
+  min-height: 52px;
   padding: 14px 18px;
-  border-radius: 18px;
-  font-weight: 800;
+  border-radius: 17px;
+  font-weight: 850;
 }
 
 .primary-button {
   color: white;
-  background: linear-gradient(110deg, #e15376, #a51d43);
   border: 0;
+  background: linear-gradient(110deg, #e15376, #a51d43);
 }
 
 .secondary-button {
   color: white;
-  background: #252029;
   border: 1px solid #493847;
+  background: #252029;
 }
 
 .pills {
@@ -195,9 +194,9 @@ button {
 
 .pill {
   padding: 10px 14px;
-  color: #d1c7d1;
   border: 1px solid #493442;
   border-radius: 100px;
+  color: #d1c7d1;
   font-size: 13px;
 }
 
@@ -206,24 +205,24 @@ button {
 .status-card {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 20px;
+  gap: 15px;
+  padding: 18px;
   margin-bottom: 28px;
-  background: var(--panel);
   border: 1px solid #3b303e;
-  border-radius: 28px;
+  border-radius: 27px;
+  background: var(--panel);
 }
 
 .avatar {
-  width: 78px;
-  height: 78px;
+  width: 68px;
+  height: 68px;
   flex-shrink: 0;
   display: grid;
   place-items: center;
-  background: #45172d;
   border: 1px solid #682a47;
-  border-radius: 25px;
-  font-size: 32px;
+  border-radius: 22px;
+  background: #45172d;
+  font-size: 30px;
 }
 
 .status-info {
@@ -232,38 +231,38 @@ button {
 }
 
 .status-info h2 {
-  margin: 0 0 8px;
-  font-size: 23px;
+  margin: 0 0 7px;
+  font-size: 21px;
 }
 
 .status-info p {
   margin: 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
 .status-select {
-  width: 125px;
-  padding: 12px 5px;
+  width: 118px;
+  padding: 11px 5px;
   color: white;
-  background: #100c13;
   border: 1px solid #493344;
-  border-radius: 14px;
+  border-radius: 13px;
+  background: #100c13;
 }
 
-/* WINGS OF FREEDOM BANNER */
+/* WINGS OF FREEDOM BANNER — SEPARATE FROM APP LOGO */
 
 .freedom-card {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 36px;
-  padding: 40px;
-  margin-bottom: 48px;
+  gap: 28px;
+  padding: 34px;
+  margin-bottom: 46px;
   overflow: hidden;
   border: 2px solid #49303e;
-  border-radius: 44px;
+  border-radius: 38px;
   background:
     radial-gradient(circle at 8% 15%, #185e4f55, transparent 42%),
     linear-gradient(115deg, #192a29, #211a25 48%, #2a111d);
@@ -272,17 +271,16 @@ button {
 .freedom-card::after {
   content: "";
   position: absolute;
-  right: 28px;
   bottom: 0;
+  right: 25px;
   width: 45%;
-  height: 7px;
+  height: 6px;
   background: linear-gradient(90deg, transparent, #a51d43, #ed3158);
 }
 
 .emblem-wrap {
-  flex: 0 0 220px;
-  width: 220px;
-  min-width: 0;
+  width: 180px;
+  flex: 0 0 180px;
 }
 
 .wings-emblem {
@@ -298,31 +296,29 @@ button {
 }
 
 .freedom-eyebrow {
-  margin: 0 0 26px;
+  margin: 0 0 20px;
   color: var(--pink);
-  font-size: 21px;
+  font-size: 15px;
+  line-height: 1.7;
   font-weight: 900;
-  line-height: 1.55;
-  letter-spacing: 5px;
+  letter-spacing: 3px;
 }
 
 .freedom-title {
-  margin: 0 0 24px;
-  color: var(--white);
-  font-size: clamp(27px, 4vw, 42px);
+  margin: 0 0 16px;
+  font-size: clamp(24px, 4vw, 38px);
   line-height: 1.2;
   letter-spacing: -1px;
-  font-weight: 850;
 }
 
 .freedom-description {
   margin: 0;
   color: #d2cbd2;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 1.8;
 }
 
-/* SECTIONS */
+/* SECTION HEADINGS */
 
 .section {
   margin-top: 42px;
@@ -330,25 +326,27 @@ button {
 
 .section-heading {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
   margin-bottom: 22px;
 }
 
 .section-heading h2 {
   margin: 0;
-  font-size: 29px;
-  letter-spacing: -0.7px;
+  font-size: 28px;
+  letter-spacing: -.8px;
 }
 
 .text-button {
   padding: 8px 0;
   color: var(--pink);
-  background: transparent;
   border: 0;
+  background: transparent;
   font-weight: 850;
 }
+
+/* FRIENDS */
 
 .friends-grid {
   display: grid;
@@ -361,31 +359,31 @@ button {
   padding: 10px 4px;
   color: white;
   text-align: center;
-  background: transparent;
   border: 1px solid transparent;
   border-radius: 22px;
+  background: transparent;
 }
 
 .friend-card:hover {
-  background: #1a121b;
   border-color: var(--border);
+  background: #1a121b;
 }
 
 .friend-avatar {
-  width: 90px;
-  height: 90px;
-  margin: 0 auto 13px;
+  width: 82px;
+  height: 82px;
   display: grid;
   place-items: center;
-  background: #351725;
+  margin: 0 auto 12px;
   border: 1px solid #79314e;
-  border-radius: 28px;
-  font-size: 35px;
+  border-radius: 25px;
+  background: #351725;
+  font-size: 32px;
 }
 
 .friend-name {
   margin-bottom: 8px;
-  font-weight: 800;
+  font-weight: 850;
 }
 
 .friend-status {
@@ -414,19 +412,19 @@ button {
   align-items: center;
   gap: 14px;
   padding: 16px;
-  background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 20px;
+  background: var(--panel);
 }
 
 .squad-icon {
-  width: 54px;
-  height: 54px;
+  width: 52px;
+  height: 52px;
   flex-shrink: 0;
   display: grid;
   place-items: center;
-  background: #351725;
   border-radius: 17px;
+  background: #351725;
   font-size: 25px;
 }
 
@@ -449,9 +447,9 @@ button {
 .join-button {
   padding: 10px 13px;
   color: var(--pink);
-  background: #341625;
   border: 1px solid #713047;
   border-radius: 12px;
+  background: #341625;
   font-weight: 800;
 }
 
@@ -469,9 +467,9 @@ button {
 .panel {
   padding: 24px;
   margin-bottom: 16px;
-  background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 24px;
+  background: var(--panel);
 }
 
 .panel h2 {
@@ -488,16 +486,16 @@ button {
   padding: 14px;
   margin: 8px 0 16px;
   color: white;
-  background: #0d0a10;
   border: 1px solid #493344;
   border-radius: 13px;
+  background: #0d0a10;
 }
 
 .chat-message {
   padding: 14px;
   margin: 10px 0;
-  background: #251723;
   border-radius: 16px;
+  background: #251723;
 }
 
 /* BOTTOM NAVIGATION */
@@ -512,13 +510,13 @@ button {
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 4px;
   padding: 10px 10px calc(10px + env(safe-area-inset-bottom));
-  background: #100c13f5;
   border-top: 1px solid #302630;
+  background: #100c13f5;
   backdrop-filter: blur(20px);
 }
 
 .nav-button {
-  min-height: 66px;
+  min-height: 62px;
   padding: 7px 2px;
   display: flex;
   flex-direction: column;
@@ -526,15 +524,15 @@ button {
   justify-content: center;
   gap: 7px;
   color: #99919f;
-  background: transparent;
   border: 0;
   border-radius: 18px;
-  font-size: 12px;
-  font-weight: 800;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 850;
 }
 
 .nav-icon {
-  font-size: 23px;
+  font-size: 22px;
 }
 
 .nav-button.active {
@@ -542,33 +540,33 @@ button {
   background: #3c172a;
 }
 
-/* NOTIFICATIONS */
+/* TOAST */
 
 .toast {
   position: fixed;
   z-index: 30;
   left: 50%;
-  bottom: 115px;
+  bottom: 110px;
   transform: translateX(-50%);
+  display: none;
   max-width: 90%;
   padding: 13px 18px;
   color: white;
-  background: #291722;
   border: 1px solid #664052;
   border-radius: 15px;
+  background: #291722;
   text-align: center;
-  display: none;
 }
 
 .toast.show {
   display: block;
 }
 
-/* IPHONE */
+/* MOBILE */
 
 @media (max-width: 600px) {
   .app {
-    padding: 16px;
+    padding: 18px 16px;
   }
 
   .header {
@@ -577,39 +575,39 @@ button {
   }
 
   .brand {
-    gap: 12px;
+    gap: 11px;
   }
 
   .brand-logo {
-    width: 64px;
-    height: 64px;
-    border-radius: 19px;
+    width: 57px;
+    height: 57px;
+    border-radius: 18px;
   }
 
   .brand-name {
-    font-size: 34px;
+    font-size: 32px;
     letter-spacing: -1px;
   }
 
   .brand-tagline {
     margin-top: 5px;
-    font-size: 12px;
+    font-size: 11px;
     white-space: normal;
   }
 
   .header-actions {
-    gap: 8px;
+    gap: 7px;
   }
 
   .icon-button {
-    width: 43px;
-    height: 43px;
-    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
   }
 
   .hero {
-    padding: 28px 20px;
-    border-radius: 28px;
+    padding: 26px 19px;
+    border-radius: 27px;
   }
 
   .hero h2 {
@@ -631,111 +629,117 @@ button {
   }
 
   .status-card {
-    gap: 11px;
-    padding: 15px;
-    border-radius: 23px;
+    gap: 10px;
+    padding: 13px;
+    border-radius: 22px;
   }
 
   .avatar {
-    width: 63px;
-    height: 63px;
-    border-radius: 20px;
-    font-size: 27px;
+    width: 54px;
+    height: 54px;
+    border-radius: 17px;
+    font-size: 24px;
   }
 
   .status-info h2 {
-    font-size: 19px;
+    font-size: 17px;
   }
 
   .status-info p {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .status-select {
-    width: 105px;
-    font-size: 12px;
+    width: 98px;
+    font-size: 11px;
   }
 
   .freedom-card {
-    gap: 18px;
-    padding: 24px 17px;
-    border-radius: 30px;
+    gap: 16px;
+    padding: 22px 15px;
+    border-radius: 29px;
   }
 
   .emblem-wrap {
-    flex: 0 0 88px;
     width: 88px;
+    flex: 0 0 88px;
   }
 
   .freedom-eyebrow {
-    margin-bottom: 15px;
-    font-size: 10px;
-    letter-spacing: 2px;
-    line-height: 1.8;
+    margin-bottom: 12px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
   }
 
   .freedom-title {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-size: 19px;
-    line-height: 1.35;
   }
 
   .freedom-description {
     font-size: 13px;
-    line-height: 1.8;
+    line-height: 1.7;
   }
 
   .section-heading h2 {
-    font-size: 24px;
+    font-size: 23px;
   }
 
   .friend-avatar {
-    width: 73px;
-    height: 73px;
-    border-radius: 24px;
-    font-size: 30px;
+    width: 69px;
+    height: 69px;
+    border-radius: 22px;
+    font-size: 28px;
   }
 
   .friend-name {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .friend-status {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .nav-button {
-    min-height: 62px;
+    min-height: 59px;
     font-size: 10px;
   }
 
   .nav-icon {
-    font-size: 21px;
+    font-size: 20px;
   }
 }
 
 @media (max-width: 360px) {
+  .brand-logo {
+    width: 49px;
+    height: 49px;
+  }
+
+  .brand-name {
+    font-size: 27px;
+  }
+
+  .brand-tagline {
+    font-size: 10px;
+  }
+
   .freedom-card {
-    gap: 12px;
-    padding: 19px 12px;
+    gap: 11px;
+    padding: 17px 10px;
   }
 
   .emblem-wrap {
-    flex-basis: 72px;
-    width: 72px;
-  }
-
-  .freedom-eyebrow {
-    font-size: 9px;
-    letter-spacing: 1.2px;
+    width: 70px;
+    flex-basis: 70px;
   }
 
   .freedom-title {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   .freedom-description {
-    font-size: 12px;
+    font-size: 11px;
   }
 }
 </style>
@@ -747,11 +751,10 @@ button {
   <header class="header">
     <div class="brand">
       <div class="brand-logo">
-        <img src="./anki_wings_of_freedom.png"
-             alt="Wings of Freedom">
+        <img src="./anki_sword_scarf_logo.png" alt="Anki sword and scarf logo">
       </div>
 
-      <div class="brand-text">
+      <div>
         <h1 class="brand-name">Anki</h1>
         <p class="brand-tagline">Your people. Your world.</p>
       </div>
@@ -767,6 +770,7 @@ button {
 
     <section class="hero">
       <div class="hero-label">✦ YOUR OWN LITTLE WORLD</div>
+
       <h2>Beyond the walls.<br><span>Together.</span></h2>
 
       <p class="hero-description">
@@ -798,18 +802,20 @@ button {
       </div>
 
       <select class="status-select" id="statusSelect" aria-label="Availability">
-        <option value="Available">Available</option>
-        <option value="Busy">Busy</option>
-        <option value="Away">Away</option>
-        <option value="Invisible">Invisible</option>
+        <option>Available</option>
+        <option>Busy</option>
+        <option>Away</option>
+        <option>Invisible</option>
       </select>
     </section>
+
+    <!-- WINGS OF FREEDOM IS ONLY IN THIS BANNER -->
 
     <section class="freedom-card">
       <div class="emblem-wrap">
         <img class="wings-emblem"
              src="./anki_wings_of_freedom.png"
-             alt="Attack on Titan Wings of Freedom emblem">
+             alt="Attack on Titan Wings of Freedom">
       </div>
 
       <div class="freedom-content">
@@ -878,9 +884,10 @@ button {
 
   <section id="chatPage" class="page">
     <div class="section-heading"><h2>Messages</h2></div>
+
     <div class="panel">
       <h2>Your conversations</h2>
-      <p class="muted">Sample conversations for the Anki demo.</p>
+      <p class="muted">These are sample conversations for the demo.</p>
 
       <div class="chat-message">
         <strong>🧣 Mikasa</strong>
@@ -898,6 +905,7 @@ button {
 
   <section id="friendsPage" class="page">
     <div class="section-heading"><h2>Your people</h2></div>
+
     <div class="panel">
       <h2>Find your people</h2>
       <input class="field" id="friendSearch" type="search"
@@ -914,6 +922,7 @@ button {
 
   <section id="squadsPage" class="page">
     <div class="section-heading"><h2>Explore squads</h2></div>
+
     <div class="panel">
       <h2>Find your crew ⚔️</h2>
       <p class="muted">Choose a squad to try the demo interaction.</p>
@@ -970,7 +979,9 @@ button {
 
     <div class="panel">
       <h2>About Anki</h2>
-      <p class="muted">A community concept for friendship, personal spaces, and squads.</p>
+      <p class="muted">
+        A community concept for friendship, personal spaces, and squads.
+      </p>
     </div>
   </section>
 </div>
@@ -1094,6 +1105,7 @@ button {
 
   $("#friendSearch").addEventListener("input", event => {
     const query = event.target.value.toLowerCase();
+
     $$("#allFriends .chat-message").forEach(item => {
       item.style.display = item.textContent.toLowerCase().includes(query)
         ? "" : "none";
