@@ -11,395 +11,578 @@
 <style>
 :root {
   --bg:#10090e;
-  --panel:#1c1119;
-  --line:#512633;
+  --card:#1b1119;
+  --border:#492432;
   --red:#e52b4f;
   --pink:#ff91a7;
   --text:#fff5f7;
-  --muted:#b8a8b1;
-  --blue:#a3adff;
+  --muted:#bbaab3;
+  --blue:#a5b0ff;
 }
 
-* { box-sizing:border-box; }
+* {
+  box-sizing:border-box;
+}
+
+html {
+  background:var(--bg);
+  scroll-behavior:smooth;
+}
 
 body {
   margin:0;
-  background:
-    radial-gradient(ellipse at top right,#461226 0%,transparent 48%),
-    var(--bg);
+  min-height:100vh;
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(ellipse at 100% 5%,#50132970,transparent 40%),
+    var(--bg);
   overflow-x:hidden;
 }
 
-button,input,textarea { font:inherit; }
-button { cursor:pointer; }
+button,input,textarea {
+  font:inherit;
+}
+
+button {
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline:2px solid var(--pink);
+  outline-offset:3px;
+}
 
 .app {
   width:100%;
-  max-width:700px;
-  margin:auto;
-  padding:20px 17px 110px;
+  max-width:680px;
+  margin:0 auto;
+  padding:20px 17px 180px;
 }
 
-header {
+/* HEADER */
+
+.topbar {
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:10px;
-  margin:12px 0 38px;
+  align-items:center;
+  gap:12px;
+  margin:8px 0 35px;
 }
 
 .brand {
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:9px;
+  min-width:0;
 }
 
 .scarf-logo {
-  font-size:37px;
-  line-height:1;
+  display:grid;
+  place-items:center;
+  width:43px;
+  height:43px;
+  font-size:35px;
+  flex-shrink:0;
 }
 
 .brand-name {
-  font-size:31px;
+  font-size:30px;
   font-weight:900;
-  letter-spacing:-1.5px;
+  letter-spacing:-1.4px;
 }
 
-.brand-name span { color:var(--pink); }
+.brand-name span {
+  color:var(--pink);
+}
 
-.actions { display:flex;gap:9px; }
+.actions {
+  display:flex;
+  gap:8px;
+}
 
 .icon-btn {
-  width:47px;
-  height:47px;
-  border:1px solid var(--line);
-  border-radius:16px;
-  background:#ffffff08;
-  color:white;
-  font-size:22px;
+  width:44px;
+  height:44px;
+  border:1px solid var(--border);
+  border-radius:15px;
+  background:#ffffff06;
+  color:var(--text);
+  font-size:21px;
 }
+
+/* HERO */
 
 .eyebrow {
   color:var(--pink);
-  font-size:11px;
+  font-size:10px;
+  line-height:1.7;
   font-weight:900;
-  letter-spacing:3px;
-  line-height:1.6;
+  letter-spacing:2.8px;
   text-transform:uppercase;
+  overflow-wrap:anywhere;
+}
+
+.hero {
+  margin-bottom:24px;
 }
 
 .hero h1 {
-  font-size:clamp(38px,9vw,54px);
-  line-height:1.05;
-  letter-spacing:-2px;
-  margin:15px 0;
+  font-size:clamp(36px,8.5vw,50px);
+  line-height:1.06;
+  letter-spacing:-1.7px;
+  margin:12px 0;
+  overflow-wrap:anywhere;
 }
 
-.hero h1 span { color:var(--pink); }
+.hero h1 span {
+  color:var(--pink);
+}
 
-.hero p,.description {
+.hero p {
   color:var(--muted);
-  font-size:16px;
+  font-size:15px;
   line-height:1.6;
+  margin:14px 0 0;
 }
 
 .pills {
   display:flex;
   flex-wrap:wrap;
-  gap:10px;
-  margin:22px 0 28px;
+  gap:8px;
+  margin-top:18px;
 }
 
 .pill {
-  border:1px solid var(--line);
+  border:1px solid var(--border);
   border-radius:30px;
-  padding:11px 14px;
-  font-size:13px;
+  padding:9px 12px;
+  color:#eadde2;
+  font-size:12px;
   font-weight:750;
 }
+
+/* WINGS OF FREEDOM BANNER */
 
 .feature {
   display:flex;
   align-items:center;
-  gap:17px;
-  padding:22px 16px;
-  margin:25px 0;
-  border:1px solid #63404d;
-  border-radius:26px;
-  background:linear-gradient(130deg,#1b3436,#2a1421 85%);
+  gap:15px;
+  min-width:0;
   position:relative;
   overflow:hidden;
+  padding:20px 15px;
+  margin:24px 0;
+  border:1px solid #62404d;
+  border-radius:24px;
+  background:linear-gradient(125deg,#1c3436,#281520 85%);
 }
 
-.feature:after {
+.feature::after {
   content:"";
   position:absolute;
-  height:4px;
-  left:30%;
+  left:32%;
   right:0;
   bottom:0;
+  height:3px;
   background:linear-gradient(90deg,transparent,var(--red));
 }
 
 .wings {
-  flex:0 0 100px;
-  width:100px;
-  height:125px;
   display:block;
+  width:90px;
+  height:110px;
+  flex:0 0 90px;
 }
 
-.feature-copy { min-width:0; }
+.feature-copy {
+  flex:1;
+  min-width:0;
+}
 
 .feature h2 {
-  font-size:clamp(19px,5vw,26px);
+  font-size:clamp(19px,4.8vw,25px);
   line-height:1.2;
-  margin:10px 0;
+  letter-spacing:-.5px;
+  margin:9px 0;
 }
 
 .feature p {
-  color:#e2d5db;
-  font-size:14px;
+  color:#e1d3da;
+  font-size:13px;
   line-height:1.55;
   margin:0;
+  overflow-wrap:anywhere;
 }
+
+/* STATUS */
 
 .status {
   display:flex;
   align-items:center;
-  gap:12px;
-  padding:15px;
-  border:1px solid var(--line);
-  border-radius:24px;
-  background:#ffffff04;
-  margin:25px 0 35px;
+  gap:11px;
+  padding:14px;
+  margin:23px 0 30px;
+  border:1px solid var(--border);
+  border-radius:21px;
+  background:#ffffff03;
 }
 
 .status-icon {
-  flex:0 0 52px;
-  height:52px;
-  border-radius:17px;
   display:grid;
   place-items:center;
-  background:#512035;
+  flex:0 0 46px;
+  width:46px;
+  height:46px;
+  border-radius:15px;
   color:var(--pink);
-  font-size:25px;
+  background:#512035;
+  font-size:22px;
 }
 
-.status-copy { flex:1;min-width:0; }
+.status-copy {
+  flex:1;
+  min-width:0;
+}
 
 .status-copy strong {
   display:block;
-  margin-bottom:6px;
+  font-size:15px;
+  margin-bottom:5px;
 }
 
 .status-copy span {
-  font-size:13px;
+  display:block;
   color:var(--muted);
-  line-height:1.4;
+  font-size:12px;
+  line-height:1.45;
+  overflow-wrap:anywhere;
 }
 
 .soft-btn {
-  background:#214638;
-  color:#b8ffd7;
+  flex-shrink:0;
   border:0;
-  border-radius:30px;
-  padding:11px 13px;
-  font-size:13px;
+  border-radius:25px;
+  padding:10px 13px;
+  color:#b8ffd7;
+  background:#214638;
+  font-size:12px;
   font-weight:800;
-  white-space:nowrap;
 }
+
+/* SECTION HEADINGS */
 
 .section-head {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
-  margin:30px 0 15px;
+  gap:8px;
+  margin:27px 0 14px;
 }
 
-.section-head h2 { font-size:23px;margin:0; }
+.section-head h2 {
+  margin:0;
+  font-size:21px;
+  letter-spacing:-.5px;
+}
 
 .text-btn {
   border:0;
-  background:none;
+  background:transparent;
   color:var(--blue);
   font-weight:800;
-  padding:8px 0;
+  font-size:13px;
+  padding:7px 0;
 }
+
+/* FRIENDS */
 
 .friends {
   display:flex;
   flex-wrap:wrap;
-  gap:13px;
+  gap:12px;
 }
 
 .friend {
-  width:76px;
+  width:72px;
   text-align:center;
   overflow-wrap:anywhere;
 }
 
 .avatar {
-  width:68px;
-  height:68px;
-  border:1px solid #633146;
-  border-radius:22px;
-  background:linear-gradient(145deg,#63253b,#251520);
   display:grid;
   place-items:center;
-  margin:0 auto 8px;
-  font-size:25px;
+  width:64px;
+  height:64px;
+  margin:0 auto 7px;
+  border:1px solid #633146;
+  border-radius:20px;
+  background:linear-gradient(145deg,#63253b,#251520);
+  font-size:24px;
 }
 
 .friend small {
   color:var(--muted);
-  font-size:12px;
+  font-size:11px;
 }
 
 .add-avatar {
-  background:#ffffff05;
-  color:var(--pink);
   border:1px dashed #8a4258;
-  font-size:32px;
-}
-
-.page { display:none; }
-.page.active { display:block; }
-
-.page-title {
-  font-size:35px;
-  letter-spacing:-1px;
-  margin:8px 0;
-}
-
-.form,.room {
-  padding:16px;
-  margin:14px 0;
-  border:1px solid var(--line);
-  border-radius:20px;
   background:#ffffff04;
+  color:var(--pink);
+  font-size:30px;
 }
 
-label {
-  display:block;
-  color:var(--muted);
-  font-size:13px;
-  margin:12px 0 7px;
-}
-
-input,textarea {
-  width:100%;
-  padding:13px;
-  border:1px solid var(--line);
-  border-radius:13px;
-  background:#120c11;
-  color:white;
-}
-
-textarea { min-height:90px; }
-
-.primary {
-  border:0;
-  border-radius:13px;
-  padding:12px 15px;
-  margin-top:12px;
-  background:var(--red);
-  color:white;
-  font-weight:800;
-}
-
-.form .primary { width:100%; }
+/* ROOMS */
 
 .room {
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:11px;
+  min-width:0;
+  padding:13px;
+  margin:10px 0;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:#ffffff03;
 }
 
 .room-icon {
-  flex:0 0 45px;
-  width:45px;
-  height:45px;
-  border-radius:14px;
-  background:#351a28;
   display:grid;
   place-items:center;
-  font-size:22px;
+  flex:0 0 43px;
+  width:43px;
+  height:43px;
+  border-radius:14px;
+  background:#351a28;
+  font-size:21px;
 }
 
-.room-info { flex:1;min-width:0; }
+.room-info {
+  flex:1;
+  min-width:0;
+}
 
-.room-info strong { display:block;font-size:14px; }
+.room-info strong {
+  display:block;
+  font-size:13px;
+  overflow-wrap:anywhere;
+}
 
 .room-info small {
   display:block;
-  color:var(--muted);
   margin-top:5px;
+  color:var(--muted);
+  font-size:11px;
   line-height:1.4;
 }
 
-.note {
+.primary {
+  flex-shrink:0;
+  border:0;
+  border-radius:12px;
+  padding:10px 12px;
+  background:var(--red);
+  color:white;
   font-size:12px;
-  color:var(--muted);
-  line-height:1.5;
+  font-weight:800;
 }
+
+/* OTHER PAGES */
+
+.page {
+  display:none;
+}
+
+.page.active {
+  display:block;
+}
+
+.page-title {
+  font-size:32px;
+  line-height:1.15;
+  letter-spacing:-1px;
+  margin:7px 0 10px;
+}
+
+.description {
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+}
+
+.form {
+  padding:15px;
+  margin:17px 0;
+  border:1px solid var(--border);
+  border-radius:19px;
+  background:#ffffff03;
+}
+
+label {
+  display:block;
+  margin:12px 0 7px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+input,textarea {
+  display:block;
+  width:100%;
+  min-width:0;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#120c11;
+  color:var(--text);
+}
+
+textarea {
+  min-height:90px;
+  resize:vertical;
+}
+
+.form .primary {
+  width:100%;
+  margin-top:12px;
+}
+
+.note {
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.55;
+  margin-top:20px;
+}
+
+/* FIXED BOTTOM NAVIGATION */
 
 .bottom-nav {
   position:fixed;
-  z-index:10;
+  z-index:50;
   left:0;
   right:0;
   bottom:0;
   display:flex;
   justify-content:space-around;
-  padding:10px 5px calc(10px + env(safe-area-inset-bottom));
-  background:#10090ef2;
+  align-items:center;
+  padding:9px 5px calc(9px + env(safe-area-inset-bottom));
+  border-top:1px solid #6b354440;
+  background:rgba(16,9,14,.96);
+  -webkit-backdrop-filter:blur(18px);
   backdrop-filter:blur(18px);
-  border-top:1px solid #6b35444d;
 }
 
 .bottom-nav button {
-  min-width:55px;
   display:flex;
+  flex:1;
+  min-width:0;
   flex-direction:column;
   align-items:center;
-  gap:5px;
-  background:none;
+  justify-content:center;
+  gap:4px;
+  padding:5px 2px;
   border:0;
+  background:transparent;
   color:var(--muted);
   font-size:11px;
   font-weight:750;
 }
 
-.bottom-nav b { font-size:22px;font-weight:500; }
-.bottom-nav button.active { color:var(--pink); }
+.bottom-nav button b {
+  font-size:21px;
+  line-height:1.2;
+  font-weight:500;
+}
+
+.bottom-nav button.active {
+  color:var(--pink);
+}
+
+/* TOAST */
 
 #toast {
   display:none;
   position:fixed;
-  z-index:20;
-  bottom:90px;
+  z-index:100;
   left:50%;
+  bottom:calc(85px + env(safe-area-inset-bottom));
   transform:translateX(-50%);
   width:max-content;
   max-width:90%;
-  padding:13px 16px;
-  border:1px solid var(--line);
+  padding:12px 15px;
+  border:1px solid var(--border);
   border-radius:14px;
   background:#2b1721;
-  font-size:13px;
   text-align:center;
+  font-size:12px;
 }
 
+/* SMALL IPHONES */
+
 @media(max-width:380px) {
-  .app { padding-left:13px;padding-right:13px; }
-  .feature { gap:10px;padding:16px 11px; }
-  .wings { flex-basis:76px;width:76px;height:100px; }
-  .status { gap:8px;padding:12px; }
-  .status-icon { flex-basis:44px;height:44px; }
-  .soft-btn { padding:9px 10px; }
+  .app {
+    padding-left:13px;
+    padding-right:13px;
+    padding-bottom:175px;
+  }
+
+  .brand-name {
+    font-size:27px;
+  }
+
+  .scarf-logo {
+    width:37px;
+    height:37px;
+    font-size:31px;
+  }
+
+  .feature {
+    gap:10px;
+    padding:16px 11px;
+  }
+
+  .wings {
+    width:73px;
+    height:96px;
+    flex-basis:73px;
+  }
+
+  .feature h2 {
+    font-size:19px;
+  }
+
+  .feature p {
+    font-size:12px;
+  }
+
+  .status {
+    gap:8px;
+    padding:11px;
+  }
+
+  .soft-btn {
+    padding:9px 10px;
+  }
+}
+
+@media(min-width:600px) {
+  .app {
+    padding-left:25px;
+    padding-right:25px;
+  }
+
+  .feature {
+    padding:25px;
+  }
+
+  .wings {
+    width:105px;
+    height:125px;
+    flex-basis:105px;
+  }
 }
 </style>
 </head>
@@ -407,62 +590,71 @@ textarea { min-height:90px; }
 <body>
 <main class="app">
 
-<header>
+<header class="topbar">
   <div class="brand">
     <span class="scarf-logo" aria-label="Mikasa scarf">🧣</span>
     <div class="brand-name">Ank<span>i</span></div>
   </div>
 
   <div class="actions">
-    <button class="icon-btn" onclick="showPage('friends')" aria-label="Friends">♧</button>
-    <button class="icon-btn" onclick="showPage('profile')" aria-label="Settings">⚙</button>
+    <button class="icon-btn" onclick="showPage('friends')"
+      aria-label="Friends">♧</button>
+    <button class="icon-btn" onclick="showPage('profile')"
+      aria-label="Profile">⚙</button>
   </div>
 </header>
+
+<!-- HOME -->
 
 <section id="home" class="page active">
 
   <div class="hero">
     <div class="eyebrow">Your people. Your world.</div>
-    <h1>Beyond the walls.<br><span>Together.</span></h1>
+
+    <h1>Beyond the walls.<br>
+      <span>Together.</span>
+    </h1>
+
     <p>Eren’s resolve. Mikasa’s strength. Your squad.</p>
+
     <div class="pills">
       <span class="pill">✦ Anime community</span>
       <span class="pill">♡ Friends first</span>
     </div>
   </div>
 
+  <!-- Wings of Freedom-inspired emblem -->
+
   <section class="feature">
 
-    <!-- Wings of Freedom-inspired emblem drawn directly in SVG -->
     <svg class="wings" viewBox="0 0 120 140"
-         role="img" aria-label="Wings of Freedom emblem">
+      role="img" aria-label="Wings of Freedom emblem">
+
       <g fill="none" stroke="#f7f5fa" stroke-width="3">
-        <path d="M19 24 L19 12 L42 12 M78 12 L101 12 L101 24"/>
-        <path d="M19 30 L19 108 L60 130 L101 108 L101 30"/>
+        <path d="M19 24V12H42M78 12H101V24"/>
+        <path d="M19 30V108L60 130L101 108V30"/>
       </g>
 
-      <!-- Blue wing -->
       <g fill="#236bb5" stroke="#0b101b" stroke-width="1.5">
-        <path d="M55 25 L34 4 L42 31 L59 44 Z"/>
-        <path d="M55 43 L27 22 L36 47 L59 59 Z"/>
-        <path d="M57 59 L22 42 L32 65 L61 76 Z"/>
-        <path d="M59 76 L23 62 L36 84 L63 92 Z"/>
-        <path d="M61 92 L34 82 L46 102 L65 108 Z"/>
-        <path d="M64 108 L49 102 L60 119 L69 116 Z"/>
+        <path d="M55 25L34 4L42 31L59 44Z"/>
+        <path d="M55 43L27 22L36 47L59 59Z"/>
+        <path d="M57 59L22 42L32 65L61 76Z"/>
+        <path d="M59 76L23 62L36 84L63 92Z"/>
+        <path d="M61 92L34 82L46 102L65 108Z"/>
+        <path d="M64 108L49 102L60 119L69 116Z"/>
       </g>
 
-      <!-- White wing -->
       <g fill="#fffaff" stroke="#111019" stroke-width="1.5">
-        <path d="M65 25 L87 4 L78 31 L61 44 Z"/>
-        <path d="M65 43 L93 22 L84 47 L61 59 Z"/>
-        <path d="M63 59 L98 42 L88 65 L59 76 Z"/>
-        <path d="M61 76 L97 62 L84 84 L57 92 Z"/>
-        <path d="M59 92 L86 82 L74 102 L55 108 Z"/>
-        <path d="M56 108 L71 102 L60 119 L51 116 Z"/>
+        <path d="M65 25L87 4L78 31L61 44Z"/>
+        <path d="M65 43L93 22L84 47L61 59Z"/>
+        <path d="M63 59L98 42L88 65L59 76Z"/>
+        <path d="M61 76L97 62L84 84L57 92Z"/>
+        <path d="M59 92L86 82L74 102L55 108Z"/>
+        <path d="M56 108L71 102L60 119L51 116Z"/>
       </g>
 
-      <path d="M60 18 L60 122" stroke="#f8f5fb"
-            stroke-width="2" fill="none"/>
+      <path d="M60 18V122"
+        stroke="#f8f5fb" stroke-width="2" fill="none"/>
     </svg>
 
     <div class="feature-copy">
@@ -475,32 +667,41 @@ textarea { min-height:90px; }
 
   <section class="status">
     <div class="status-icon">◉</div>
+
     <div class="status-copy">
       <strong>Your status</strong>
       <span id="statusText">Available to hang out</span>
     </div>
+
     <button class="soft-btn" onclick="cycleStatus()">Change</button>
   </section>
 
   <div class="section-head">
     <h2>Friends around</h2>
-    <button class="text-btn" onclick="showPage('friends')">See all →</button>
+    <button class="text-btn" onclick="showPage('friends')">
+      See all →
+    </button>
   </div>
 
   <div id="homeFriends" class="friends"></div>
 
   <div class="section-head">
     <h2>Squad rooms</h2>
-    <button class="text-btn" onclick="showPage('chat')">Explore →</button>
+    <button class="text-btn" onclick="showPage('chat')">
+      Explore →
+    </button>
   </div>
 
   <div id="homeRooms"></div>
 
   <p class="note">
-    Anki prototype. Friends and rooms are stored in this browser.
-    Real online accounts, messaging and voice calls require a backend.
+    Anki prototype. Friends and rooms are saved in this browser.
+    Real online messaging and voice calls need a backend.
   </p>
+
 </section>
+
+<!-- CHAT -->
 
 <section id="chat" class="page">
   <h1 class="page-title">Squad spaces</h1>
@@ -509,291 +710,18 @@ textarea { min-height:90px; }
   <div class="form">
     <label for="roomName">New room name</label>
     <input id="roomName" maxlength="40"
-           placeholder="Late-night anime chat">
-    <button class="primary" onclick="createRoom()">+ Create room</button>
+      placeholder="Late-night anime chat">
+
+    <button class="primary" onclick="createRoom()">
+      + Create room
+    </button>
   </div>
 
   <div id="allRooms"></div>
-  <p class="note">Joining a room is a demo action, not a live voice call.</p>
+
+  <p class="note">
+    Joining a room is a demo action, not a live voice call.
+  </p>
 </section>
 
-<section id="friends" class="page">
-  <h1 class="page-title">Your squad</h1>
-  <p class="description">Your people, your world.</p>
-
-  <div class="form">
-    <label for="friendName">Friend display name</label>
-    <input id="friendName" maxlength="24" placeholder="Enter a name">
-    <button class="primary" onclick="addFriend()">Add friend</button>
-  </div>
-
-  <div id="allFriends" class="friends"></div>
-</section>
-
-<section id="profile" class="page">
-  <h1 class="page-title">Your profile</h1>
-  <p class="description">Make your corner of the world yours.</p>
-
-  <div class="form">
-    <label for="displayName">Display name</label>
-    <input id="displayName" maxlength="24" value="Scout">
-
-    <label for="bioText">About you</label>
-    <textarea id="bioText" maxlength="180"
-              placeholder="Your story starts here..."></textarea>
-
-    <button class="primary" onclick="saveProfile()">Save profile</button>
-    <p class="note">Profile data is saved on this device only.</p>
-  </div>
-</section>
-
-</main>
-
-<nav class="bottom-nav" aria-label="Main navigation">
-  <button class="active" data-page="home" onclick="showPage('home')">
-    <b>⌂</b>Home
-  </button>
-  <button data-page="chat" onclick="showPage('chat')">
-    <b>▢</b>Chat
-  </button>
-  <button data-page="friends" onclick="showPage('friends')">
-    <b>♧</b>Friends
-  </button>
-  <button data-page="profile" onclick="showPage('profile')">
-    <b>◉</b>Profile
-  </button>
-</nav>
-
-<div id="toast" role="status" aria-live="polite"></div>
-
-<script>
-const defaultFriends = [
-  {name:"Mikasa",icon:"🧣"},
-  {name:"Armin",icon:"✦"}
-];
-
-const defaultRooms = [
-  {
-    name:"Beyond the Walls",
-    detail:"Anime · chill · meet your squad",
-    icon:"⚔️",
-    members:3
-  },
-  {
-    name:"Midnight Scouts",
-    detail:"Late-night talks and music",
-    icon:"🌙",
-    members:2
-  }
-];
-
-function loadData(key, fallback) {
-  try {
-    const saved = localStorage.getItem(key);
-    return saved ? JSON.parse(saved) : fallback;
-  } catch (e) {
-    return fallback;
-  }
-}
-
-function saveData(key, value) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch (e) {}
-}
-
-let friends = loadData("anki-friends", defaultFriends);
-let rooms = loadData("anki-rooms", defaultRooms);
-let statusIndex = 0;
-
-const statuses = [
-  "Available to hang out",
-  "Watching anime",
-  "Busy on a mission",
-  "Taking a quiet break"
-];
-
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, char => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  })[char]);
-}
-
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.style.display = "block";
-
-  clearTimeout(showToast.timer);
-
-  showToast.timer = setTimeout(() => {
-    toast.style.display = "none";
-  }, 2400);
-}
-
-function showPage(pageId) {
-  document.querySelectorAll(".page").forEach(page => {
-    page.classList.toggle("active", page.id === pageId);
-  });
-
-  document.querySelectorAll(".bottom-nav button").forEach(button => {
-    button.classList.toggle("active", button.dataset.page === pageId);
-  });
-
-  window.scrollTo({top:0, behavior:"smooth"});
-
-  renderFriends();
-  renderRooms();
-}
-
-function cycleStatus() {
-  statusIndex = (statusIndex + 1) % statuses.length;
-  document.getElementById("statusText").textContent =
-    statuses[statusIndex];
-
-  showToast("Status updated");
-}
-
-function friendCard(friend, index, removable = false) {
-  return `
-    <div class="friend">
-      <div class="avatar">${escapeHTML(friend.icon || "✦")}</div>
-      <small>${escapeHTML(friend.name)}</small>
-      ${removable
-        ? `<button class="text-btn"
-             onclick="removeFriend(${index})">Remove</button>`
-        : ""}
-    </div>
-  `;
-}
-
-function renderFriends() {
-  const home = document.getElementById("homeFriends");
-  const all = document.getElementById("allFriends");
-
-  home.innerHTML =
-    friends.map((friend, index) => friendCard(friend, index)).join("") +
-    `<button class="friend" onclick="showPage('friends')"
-       style="border:0;background:none;color:inherit">
-       <span class="avatar add-avatar">+</span>
-       <small>Add friend</small>
-     </button>`;
-
-  all.innerHTML = friends.length
-    ? friends.map((friend, index) =>
-        friendCard(friend, index, true)).join("")
-    : `<p class="note">Your squad is waiting. Add your first friend above.</p>`;
-}
-
-function addFriend() {
-  const input = document.getElementById("friendName");
-  const name = input.value.trim();
-
-  if (!name) {
-    showToast("Enter a name first");
-    input.focus();
-    return;
-  }
-
-  if (friends.some(friend =>
-      friend.name.toLowerCase() === name.toLowerCase())) {
-    showToast("That name is already in your squad");
-    return;
-  }
-
-  friends.push({name:name, icon:"✦"});
-  saveData("anki-friends", friends);
-
-  input.value = "";
-  renderFriends();
-  showToast(name + " added");
-}
-
-function removeFriend(index) {
-  friends.splice(index, 1);
-  saveData("anki-friends", friends);
-  renderFriends();
-  showToast("Friend removed");
-}
-
-function roomCard(room, index) {
-  return `
-    <article class="room">
-      <div class="room-icon">${escapeHTML(room.icon || "⚔️")}</div>
-      <div class="room-info">
-        <strong>${escapeHTML(room.name)}</strong>
-        <small>${escapeHTML(room.detail || "Your squad room")}
-          · ${Number(room.members) || 1} here</small>
-      </div>
-      <button class="primary" onclick="joinRoom(${index})">Join</button>
-    </article>
-  `;
-}
-
-function renderRooms() {
-  const content = rooms.map(roomCard).join("") ||
-    `<p class="note">No rooms yet. Create one above.</p>`;
-
-  document.getElementById("homeRooms").innerHTML = content;
-  document.getElementById("allRooms").innerHTML = content;
-}
-
-function joinRoom(index) {
-  if (rooms[index]) {
-    showToast("Joined " + rooms[index].name + " — demo room");
-  }
-}
-
-function createRoom() {
-  const input = document.getElementById("roomName");
-  const name = input.value.trim();
-
-  if (!name) {
-    showToast("Give your room a name first");
-    input.focus();
-    return;
-  }
-
-  rooms.unshift({
-    name:name,
-    detail:"Your own squad room",
-    icon:"⚔️",
-    members:1
-  });
-
-  saveData("anki-rooms", rooms);
-  input.value = "";
-  renderRooms();
-  showToast("Room created on this device");
-}
-
-function saveProfile() {
-  const name =
-    document.getElementById("displayName").value.trim() || "Scout";
-  const bio = document.getElementById("bioText").value.trim();
-
-  saveData("anki-profile", {name:name, bio:bio});
-  showToast("Profile saved on this device");
-}
-
-(function init() {
-  const profile = loadData("anki-profile", null);
-
-  if (profile) {
-    document.getElementById("displayName").value =
-      profile.name || "Scout";
-
-    document.getElementById("bioText").value =
-      profile.bio || "";
-  }
-
-  renderFriends();
-  renderRooms();
-})();
-</script>
-</body>
-</html>
+<!-- FRIENDS -->
