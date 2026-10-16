@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0a080d">
 <title>Anki — Your People, Your World</title>
 
@@ -10,34 +10,25 @@
 :root {
   --bg: #0a080d;
   --panel: #151119;
-  --panel2: #21151e;
   --pink: #f28ba5;
-  --pink2: #bd244e;
-  --text: #fff8fc;
-  --muted: #a9a0ad;
-  --border: #342832;
+  --border: #382934;
+  --muted: #aaa1ad;
+  --white: #fff8fc;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
-  background:
-    radial-gradient(ellipse at 50% 20%, #24101d 0%, transparent 45%),
-    var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-               Roboto, Arial, sans-serif;
-  padding-bottom: 105px;
+  background: var(--bg);
+  color: var(--white);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  padding-bottom: calc(105px + env(safe-area-inset-bottom));
 }
 
-button, input, select {
+button, input, textarea, select {
   font: inherit;
 }
 
@@ -45,15 +36,9 @@ button {
   cursor: pointer;
 }
 
-button:focus-visible,
-input:focus-visible,
-select:focus-visible {
-  outline: 2px solid var(--pink);
-  outline-offset: 3px;
-}
-
 .app {
-  width: min(100%, 1000px);
+  width: 100%;
+  max-width: 1000px;
   margin: auto;
   padding: 20px 24px;
 }
@@ -64,40 +49,46 @@ select:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 15px;
+  gap: 12px;
   margin-bottom: 28px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
+  min-width: 0;
 }
 
 .brand-logo {
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
+  width: 55px;
+  height: 55px;
+  flex-shrink: 0;
+  overflow: hidden;
   display: grid;
   place-items: center;
-  color: white;
-  font-size: 29px;
-  font-weight: 900;
-  background: linear-gradient(145deg, #f28ba5, #a51643);
-  box-shadow: 0 7px 25px #b51e4730;
+  background: #050407;
+  border: 1px solid #49303e;
+  border-radius: 17px;
+}
+
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .brand-name {
-  margin: 0;
   font-size: 29px;
   font-weight: 900;
+  margin: 0;
   letter-spacing: -1px;
 }
 
 .brand-tagline {
-  margin: 3px 0 0;
-  font-size: 12px;
+  margin: 4px 0 0;
   color: var(--muted);
+  font-size: 13px;
 }
 
 .header-actions {
@@ -106,49 +97,44 @@ select:focus-visible {
 }
 
 .icon-button {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  color: white;
-  background: var(--panel);
+  width: 47px;
+  height: 47px;
   border: 1px solid var(--border);
-  font-size: 20px;
+  border-radius: 50%;
+  background: #17121a;
+  color: white;
+  font-size: 22px;
 }
 
 /* HERO */
 
 .hero {
-  position: relative;
-  overflow: hidden;
-  padding: 32px;
+  padding: 34px;
   border: 1px solid #573043;
-  border-radius: 30px;
+  border-radius: 34px;
   background:
-    radial-gradient(circle at 85% 15%, #6b19302b, transparent 35%),
-    linear-gradient(140deg, #1c131c, #100c13);
+    radial-gradient(ellipse at 85% 15%, #64162b30, transparent 45%),
+    linear-gradient(140deg, #1d131d, #100c13);
   margin-bottom: 26px;
 }
 
 .hero-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-block;
   color: var(--pink);
   background: #f28ba511;
-  border: 1px solid #f28ba52c;
+  border: 1px solid #633448;
   border-radius: 100px;
-  padding: 8px 12px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 1.4px;
 }
 
 .hero h2 {
-  font-size: clamp(32px, 6vw, 52px);
-  letter-spacing: -2px;
+  font-size: clamp(35px, 6vw, 54px);
   line-height: 1.1;
-  margin: 22px 0 12px;
+  letter-spacing: -2px;
+  margin: 28px 0 18px;
 }
 
 .hero h2 span {
@@ -156,52 +142,50 @@ select:focus-visible {
 }
 
 .hero-description {
-  max-width: 530px;
   color: var(--muted);
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: 17px;
+  line-height: 1.8;
   margin: 0;
 }
 
 .hero-buttons {
   display: flex;
-  flex-wrap: wrap;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 26px;
 }
 
 .primary-button,
 .secondary-button {
-  min-height: 48px;
-  padding: 13px 19px;
-  border-radius: 17px;
+  min-height: 50px;
+  padding: 14px 18px;
+  border-radius: 18px;
   font-weight: 800;
-  border: 1px solid transparent;
 }
 
 .primary-button {
+  background: linear-gradient(110deg, #e15376, #a51d43);
+  border: 0;
   color: white;
-  background: linear-gradient(115deg, #df4c70, #a51d43);
 }
 
 .secondary-button {
-  color: white;
   background: #252029;
-  border-color: #423642;
+  border: 1px solid #493847;
+  color: white;
 }
 
 .pills {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 22px;
+  margin-top: 24px;
 }
 
 .pill {
-  color: #c9c0ca;
-  padding: 9px 13px;
-  border: 1px solid #40303e;
+  border: 1px solid #493442;
   border-radius: 100px;
+  padding: 10px 14px;
+  color: #d1c7d1;
   font-size: 13px;
 }
 
@@ -210,29 +194,29 @@ select:focus-visible {
 .status-card {
   display: flex;
   align-items: center;
-  gap: 17px;
+  gap: 16px;
   padding: 20px;
-  margin-bottom: 26px;
-  border: 1px solid #3c3340;
+  margin-bottom: 28px;
+  background: var(--panel);
+  border: 1px solid #3b303e;
   border-radius: 28px;
-  background: #151119;
 }
 
 .avatar {
+  width: 78px;
+  height: 78px;
   flex-shrink: 0;
-  width: 82px;
-  height: 82px;
   display: grid;
   place-items: center;
   background: #45172d;
   border: 1px solid #682a47;
   border-radius: 25px;
-  font-size: 35px;
+  font-size: 32px;
 }
 
 .status-info {
-  min-width: 0;
   flex: 1;
+  min-width: 0;
 }
 
 .status-info h2 {
@@ -248,12 +232,12 @@ select:focus-visible {
 }
 
 .status-select {
-  max-width: 145px;
-  padding: 12px;
+  width: 125px;
+  padding: 12px 5px;
   color: white;
-  background: #110d14;
+  background: #100c13;
   border: 1px solid #493344;
-  border-radius: 15px;
+  border-radius: 14px;
 }
 
 /* WINGS OF FREEDOM BANNER */
@@ -263,73 +247,61 @@ select:focus-visible {
   display: flex;
   align-items: center;
   gap: 36px;
-  width: 100%;
-  padding: 38px 40px;
-  overflow: hidden;
+  padding: 40px;
   margin-bottom: 48px;
-
+  overflow: hidden;
   border: 2px solid #49303e;
   border-radius: 44px;
-
   background:
-    radial-gradient(
-      circle at 8% 15%,
-      rgba(24, 94, 79, 0.38),
-      transparent 42%
-    ),
-    linear-gradient(
-      115deg,
-      #192a29 0%,
-      #211a25 48%,
-      #2a111d 100%
-    );
+    radial-gradient(circle at 8% 15%, #185e4f55, transparent 42%),
+    linear-gradient(115deg, #192a29, #211a25 48%, #2a111d);
 }
 
 .freedom-card::after {
   content: "";
   position: absolute;
   bottom: 0;
-  right: 30px;
+  right: 28px;
   width: 45%;
   height: 7px;
   background: linear-gradient(90deg, transparent, #a51d43, #ed3158);
-  border-radius: 15px 0 0 0;
 }
 
-/* Emblem drawing */
-
 .emblem-wrap {
-  flex: 0 0 240px;
-  width: 240px;
+  flex: 0 0 220px;
+  width: 220px;
   min-width: 0;
+  display: grid;
+  place-items: center;
 }
 
 .wings-emblem {
   display: block;
   width: 100%;
   height: auto;
+  object-fit: contain;
 }
 
 .freedom-content {
-  min-width: 0;
   flex: 1;
+  min-width: 0;
 }
 
 .freedom-eyebrow {
   color: var(--pink);
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 900;
-  line-height: 1.5;
+  line-height: 1.55;
   letter-spacing: 5px;
-  margin: 0 0 28px;
+  margin: 0 0 26px;
 }
 
 .freedom-title {
-  color: #fff8fc;
+  color: var(--white);
   font-size: clamp(27px, 4vw, 42px);
   line-height: 1.2;
   letter-spacing: -1px;
-  margin: 0 0 26px;
+  margin: 0 0 24px;
   font-weight: 850;
 }
 
@@ -343,13 +315,13 @@ select:focus-visible {
 /* SECTIONS */
 
 .section {
-  margin-top: 38px;
+  margin-top: 42px;
 }
 
 .section-heading {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 12px;
   margin-bottom: 22px;
 }
@@ -361,49 +333,49 @@ select:focus-visible {
 }
 
 .text-button {
-  border: 0;
-  padding: 8px 0;
   color: var(--pink);
-  font-weight: 800;
   background: transparent;
+  border: 0;
+  font-weight: 850;
+  padding: 8px 0;
 }
 
 .friends-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 15px;
+  gap: 12px;
 }
 
 .friend-card {
+  padding: 10px 4px;
   min-width: 0;
-  padding: 13px 8px;
   text-align: center;
+  color: white;
   background: transparent;
   border: 1px solid transparent;
   border-radius: 22px;
-  color: var(--text);
 }
 
 .friend-card:hover {
   background: #1a121b;
-  border-color: #3e2939;
+  border-color: var(--border);
 }
 
 .friend-avatar {
   width: 90px;
   height: 90px;
-  margin: 0 auto 14px;
+  margin: 0 auto 13px;
   display: grid;
   place-items: center;
   background: #351725;
   border: 1px solid #79314e;
-  border-radius: 29px;
-  font-size: 36px;
+  border-radius: 28px;
+  font-size: 35px;
 }
 
 .friend-name {
   font-weight: 800;
-  margin-bottom: 7px;
+  margin-bottom: 8px;
   overflow-wrap: anywhere;
 }
 
@@ -441,6 +413,7 @@ select:focus-visible {
 .squad-icon {
   width: 54px;
   height: 54px;
+  flex-shrink: 0;
   display: grid;
   place-items: center;
   background: #351725;
@@ -473,57 +446,7 @@ select:focus-visible {
   font-weight: 800;
 }
 
-/* BOTTOM NAVIGATION */
-
-.bottom-nav {
-  position: fixed;
-  z-index: 10;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 4px;
-
-  padding: 10px max(10px, env(safe-area-inset-left))
-           calc(10px + env(safe-area-inset-bottom));
-
-  background: rgba(15, 12, 19, 0.96);
-  border-top: 1px solid #302630;
-  backdrop-filter: blur(20px);
-}
-
-.nav-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-
-  min-height: 67px;
-  padding: 8px 2px;
-
-  border: 0;
-  border-radius: 19px;
-  color: #99919f;
-  background: transparent;
-
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.nav-icon {
-  font-size: 23px;
-  line-height: 1;
-}
-
-.nav-button.active {
-  color: var(--pink);
-  background: #3c172a;
-}
-
-/* OTHER PAGES */
+/* PAGES */
 
 .page {
   display: none;
@@ -536,14 +459,19 @@ select:focus-visible {
 
 .panel {
   padding: 24px;
+  margin-bottom: 16px;
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 24px;
-  margin-bottom: 16px;
 }
 
 .panel h2 {
   margin-top: 0;
+}
+
+.muted {
+  color: var(--muted);
+  line-height: 1.7;
 }
 
 .field {
@@ -563,37 +491,71 @@ select:focus-visible {
   border-radius: 16px;
 }
 
-.muted {
-  color: var(--muted);
-  line-height: 1.6;
+/* BOTTOM NAV */
+
+.bottom-nav {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  padding: 10px 10px calc(10px + env(safe-area-inset-bottom));
+  background: #100c13f5;
+  border-top: 1px solid #302630;
+  backdrop-filter: blur(20px);
 }
+
+.nav-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 66px;
+  padding: 7px 2px;
+  border: 0;
+  border-radius: 18px;
+  color: #99919f;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.nav-icon {
+  font-size: 23px;
+}
+
+.nav-button.active {
+  color: var(--pink);
+  background: #3c172a;
+}
+
+/* TOAST */
 
 .toast {
   position: fixed;
   z-index: 30;
   left: 50%;
-  bottom: calc(105px + env(safe-area-inset-bottom));
-  transform: translate(-50%, 15px);
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.2s;
-
-  max-width: calc(100% - 30px);
+  bottom: 115px;
+  transform: translateX(-50%);
+  max-width: 90%;
   padding: 13px 18px;
+  color: white;
+  background: #291722;
   border: 1px solid #664052;
   border-radius: 15px;
-  color: white;
-  background: #25151f;
   text-align: center;
-  box-shadow: 0 10px 35px #0005;
+  display: none;
 }
 
 .toast.show {
-  opacity: 1;
-  transform: translate(-50%, 0);
+  display: block;
 }
 
-/* MOBILE */
+/* IPHONE RESPONSIVE */
 
 @media (max-width: 600px) {
   .app {
@@ -601,9 +563,8 @@ select:focus-visible {
   }
 
   .brand-logo {
-    width: 43px;
-    height: 43px;
-    border-radius: 14px;
+    width: 48px;
+    height: 48px;
   }
 
   .brand-name {
@@ -611,20 +572,25 @@ select:focus-visible {
   }
 
   .brand-tagline {
-    font-size: 10px;
+    font-size: 11px;
+  }
+
+  .icon-button {
+    width: 42px;
+    height: 42px;
   }
 
   .hero {
-    padding: 24px 20px;
-    border-radius: 25px;
+    padding: 28px 20px;
+    border-radius: 28px;
   }
 
   .hero h2 {
-    font-size: 36px;
+    font-size: 38px;
   }
 
   .hero-description {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .hero-buttons {
@@ -638,16 +604,16 @@ select:focus-visible {
   }
 
   .status-card {
-    gap: 12px;
+    gap: 11px;
     padding: 15px;
     border-radius: 23px;
   }
 
   .avatar {
-    width: 65px;
-    height: 65px;
+    width: 63px;
+    height: 63px;
     border-radius: 20px;
-    font-size: 28px;
+    font-size: 27px;
   }
 
   .status-info h2 {
@@ -659,16 +625,14 @@ select:focus-visible {
   }
 
   .status-select {
-    width: 112px;
+    width: 105px;
     font-size: 12px;
-    padding: 10px 5px;
   }
 
   .freedom-card {
     gap: 18px;
     padding: 24px 17px;
-    border-radius: 29px;
-    margin-bottom: 38px;
+    border-radius: 30px;
   }
 
   .emblem-wrap {
@@ -685,7 +649,7 @@ select:focus-visible {
 
   .freedom-title {
     font-size: 19px;
-    letter-spacing: -0.4px;
+    line-height: 1.35;
     margin-bottom: 12px;
   }
 
@@ -718,14 +682,9 @@ select:focus-visible {
     font-size: 11px;
   }
 
-  .bottom-nav {
-    padding-top: 8px;
-  }
-
   .nav-button {
     min-height: 62px;
     font-size: 10px;
-    border-radius: 15px;
   }
 
   .nav-icon {
@@ -746,7 +705,7 @@ select:focus-visible {
 
   .freedom-eyebrow {
     font-size: 9px;
-    letter-spacing: 1.3px;
+    letter-spacing: 1.2px;
   }
 
   .freedom-title {
@@ -756,22 +715,19 @@ select:focus-visible {
   .freedom-description {
     font-size: 12px;
   }
-
-  .status-select {
-    width: 98px;
-  }
 }
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
-  <!-- HEADER -->
   <header class="header">
     <div class="brand">
-      <div class="brand-logo">A</div>
+      <div class="brand-logo">
+        <img src="./anki_wings_of_freedom.png"
+             alt="Anki Wings of Freedom logo">
+      </div>
       <div>
         <h1 class="brand-name">Anki</h1>
         <p class="brand-tagline">Your people. Your world.</p>
@@ -779,14 +735,13 @@ select:focus-visible {
     </div>
 
     <div class="header-actions">
-      <button class="icon-button" id="searchButton"
-              aria-label="Search">⌕</button>
-      <button class="icon-button" id="menuButton"
-              aria-label="Menu">☰</button>
+      <button class="icon-button" id="searchButton" aria-label="Search">⌕</button>
+      <button class="icon-button" id="menuButton" aria-label="Menu">☰</button>
     </div>
   </header>
 
-  <!-- HOME PAGE -->
+  <!-- HOME -->
+
   <main id="homePage" class="page active">
 
     <section class="hero">
@@ -803,7 +758,6 @@ select:focus-visible {
         <button class="primary-button" id="findPeopleButton">
           + Find your people
         </button>
-
         <button class="secondary-button" id="exploreButton">
           ⚔️ Explore squads
         </button>
@@ -815,163 +769,68 @@ select:focus-visible {
       </div>
     </section>
 
-    <!-- PROFILE STATUS -->
     <section class="status-card">
-      <div class="avatar" aria-hidden="true">🧣</div>
-
+      <div class="avatar">🧣</div>
       <div class="status-info">
         <h2 id="profileName">Itachi</h2>
         <p id="statusDescription">Ready to connect with your people</p>
       </div>
 
-      <select class="status-select" id="statusSelect"
-              aria-label="Availability">
-        <option value="Available">🟢 Available</option>
-        <option value="Busy">🔴 Busy</option>
-        <option value="Away">🌙 Away</option>
-        <option value="Invisible">⚫ Invisible</option>
+      <select class="status-select" id="statusSelect" aria-label="Availability">
+        <option>Available</option>
+        <option>Busy</option>
+        <option>Away</option>
+        <option>Invisible</option>
       </select>
     </section>
 
-    <!-- WINGS OF FREEDOM CARD -->
+    <!-- REAL IMAGE FILE, NOT A REDRAWN SVG -->
+
     <section class="freedom-card">
-
       <div class="emblem-wrap">
-        <svg class="wings-emblem"
-             viewBox="0 0 240 280"
-             role="img"
-             aria-label="Blue and white Wings of Freedom emblem">
-
-          <defs>
-            <linearGradient id="shieldBg" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#182b2a"/>
-              <stop offset="1" stop-color="#201721"/>
-            </linearGradient>
-
-            <linearGradient id="blueWing" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#17649a"/>
-              <stop offset="1" stop-color="#092f51"/>
-            </linearGradient>
-
-            <linearGradient id="whiteWing" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#ffffff"/>
-              <stop offset="1" stop-color="#c9d4df"/>
-            </linearGradient>
-          </defs>
-
-          <!-- Dark emblem background -->
-          <rect x="2" y="2" width="236" height="276"
-                rx="28" fill="#030305"/>
-
-          <!-- Shield outline -->
-          <path d="M45 42 L195 42 L195 198 L120 238 L45 198 Z"
-                fill="none" stroke="#f7f5f7"
-                stroke-width="5" stroke-linejoin="round"/>
-
-          <!-- Top shield edge -->
-          <path d="M56 32 L108 32 L120 43 L132 32 L184 32"
-                fill="none" stroke="#ffffff"
-                stroke-width="5" stroke-linecap="square"/>
-
-          <!-- Left blue feathers -->
-          <g fill="url(#blueWing)" stroke="#09111a" stroke-width="2">
-            <path d="M111 62 L62 46 L76 68 L112 82 Z"/>
-            <path d="M111 83 L56 65 L71 90 L111 103 Z"/>
-            <path d="M111 104 L55 89 L70 114 L111 125 Z"/>
-            <path d="M111 125 L59 112 L76 136 L111 146 Z"/>
-            <path d="M111 146 L68 136 L85 158 L111 166 Z"/>
-            <path d="M111 166 L79 160 L96 181 L112 185 Z"/>
-            <path d="M111 185 L92 182 L108 200 L115 202 Z"/>
-          </g>
-
-          <!-- Right white feathers -->
-          <g fill="url(#whiteWing)" stroke="#12131a" stroke-width="2">
-            <path d="M129 62 L178 46 L164 68 L128 82 Z"/>
-            <path d="M129 83 L184 65 L169 90 L129 103 Z"/>
-            <path d="M129 104 L185 89 L170 114 L129 125 Z"/>
-            <path d="M129 125 L181 112 L164 136 L129 146 Z"/>
-            <path d="M129 146 L172 136 L155 158 L129 166 Z"/>
-            <path d="M129 166 L161 160 L144 181 L128 185 Z"/>
-            <path d="M129 185 L148 182 L132 200 L125 202 Z"/>
-          </g>
-
-          <!-- Wing centers -->
-          <path d="M120 45 L120 222"
-                stroke="#ffffff" stroke-width="4"/>
-
-          <!-- Center feather tips -->
-          <path d="M115 78 L105 105 L117 100 Z"
-                fill="#f8f8f8"/>
-          <path d="M125 78 L135 105 L123 100 Z"
-                fill="#f8f8f8"/>
-
-          <!-- Lower wing silhouette -->
-          <path d="M108 200 L120 224 L132 200"
-                fill="#e9edf1" stroke="#111116" stroke-width="2"/>
-
-          <!-- Shield bottom -->
-          <path d="M45 198 L120 238 L195 198"
-                fill="none" stroke="#ffffff" stroke-width="5"/>
-
-        </svg>
+        <img class="wings-emblem"
+             src="./anki_wings_of_freedom.png"
+             alt="Attack on Titan Wings of Freedom emblem">
       </div>
 
       <div class="freedom-content">
         <p class="freedom-eyebrow">
           A LITTLE SYMBOL. A LOT OF MEANING.
         </p>
-
-        <h2 class="freedom-title">
-          Keep your people close.
-        </h2>
-
+        <h2 class="freedom-title">Keep your people close.</h2>
         <p class="freedom-description">
-          Your own corner of the world,
-          made for your crew.
+          Your own corner of the world, made for your crew.
         </p>
       </div>
-
     </section>
 
-    <!-- FRIENDS -->
     <section class="section">
       <div class="section-heading">
         <h2>Friends around</h2>
-        <button class="text-button" id="seeAllFriends">
-          See all →
-        </button>
+        <button class="text-button" id="seeAllFriends">See all →</button>
       </div>
 
-      <div class="friends-grid" id="friendsGrid">
-
+      <div class="friends-grid">
         <button class="friend-card" data-friend="Mikasa">
           <div class="friend-avatar">🧣</div>
           <div class="friend-name">Mikasa</div>
-          <div class="friend-status">
-            <span class="online-dot"></span>Online demo
-          </div>
+          <div class="friend-status"><span class="online-dot"></span>Online demo</div>
         </button>
 
         <button class="friend-card" data-friend="Armin">
           <div class="friend-avatar">📘</div>
           <div class="friend-name">Armin</div>
-          <div class="friend-status">
-            <span class="online-dot"></span>Online demo
-          </div>
+          <div class="friend-status"><span class="online-dot"></span>Online demo</div>
         </button>
 
         <button class="friend-card" data-friend="Levi">
           <div class="friend-avatar">⚔️</div>
           <div class="friend-name">Levi</div>
-          <div class="friend-status">
-            <span class="online-dot"></span>Online demo
-          </div>
+          <div class="friend-status"><span class="online-dot"></span>Online demo</div>
         </button>
-
       </div>
     </section>
 
-    <!-- SQUADS PREVIEW -->
     <section class="section">
       <div class="section-heading">
         <h2>Your squads</h2>
@@ -985,9 +844,7 @@ select:focus-visible {
             <h3>Survey Corps</h3>
             <p>Friends who explore together</p>
           </div>
-          <button class="join-button" data-squad="Survey Corps">
-            Open
-          </button>
+          <button class="join-button" data-squad="Survey Corps">Open</button>
         </article>
 
         <article class="squad-card">
@@ -996,60 +853,44 @@ select:focus-visible {
             <h3>Night Owls</h3>
             <p>Your late-night conversation crew</p>
           </div>
-          <button class="join-button" data-squad="Night Owls">
-            Open
-          </button>
+          <button class="join-button" data-squad="Night Owls">Open</button>
         </article>
       </div>
     </section>
-
   </main>
 
-  <!-- CHAT PAGE -->
+  <!-- CHAT -->
+
   <section id="chatPage" class="page">
-    <div class="section-heading">
-      <h2>Messages</h2>
-    </div>
+    <div class="section-heading"><h2>Messages</h2></div>
 
     <div class="panel">
       <h2>Your conversations</h2>
-      <p class="muted">
-        This demo displays sample conversations.
-        Real messaging requires a backend.
-      </p>
+      <p class="muted">These are sample conversations for the demo.</p>
 
       <div class="chat-message">
         <strong>🧣 Mikasa</strong>
         <p class="muted">Hey! Welcome to Anki.</p>
-        <button class="secondary-button"
-                data-message="Mikasa">Open conversation</button>
+        <button class="secondary-button" data-message="Mikasa">Open conversation</button>
       </div>
 
       <div class="chat-message">
         <strong>📘 Armin</strong>
         <p class="muted">Let's explore a new squad.</p>
-        <button class="secondary-button"
-                data-message="Armin">Open conversation</button>
+        <button class="secondary-button" data-message="Armin">Open conversation</button>
       </div>
     </div>
   </section>
 
-  <!-- FRIENDS PAGE -->
+  <!-- FRIENDS -->
+
   <section id="friendsPage" class="page">
-    <div class="section-heading">
-      <h2>Your people</h2>
-    </div>
+    <div class="section-heading"><h2>Your people</h2></div>
 
     <div class="panel">
       <h2>Find your people</h2>
-      <p class="muted">
-        Search this demo's sample friends.
-      </p>
-
-      <input class="field" id="friendSearch"
-             type="search"
-             placeholder="Search friends..."
-             aria-label="Search friends">
+      <input class="field" id="friendSearch" type="search"
+             placeholder="Search friends..." aria-label="Search friends">
 
       <div id="allFriends">
         <div class="chat-message">🧣 Mikasa — Demo friend</div>
@@ -1060,17 +901,14 @@ select:focus-visible {
     </div>
   </section>
 
-  <!-- SQUADS PAGE -->
+  <!-- SQUADS -->
+
   <section id="squadsPage" class="page">
-    <div class="section-heading">
-      <h2>Explore squads</h2>
-    </div>
+    <div class="section-heading"><h2>Explore squads</h2></div>
 
     <div class="panel">
       <h2>Find your crew ⚔️</h2>
-      <p class="muted">
-        Choose a demo squad to see an interaction.
-      </p>
+      <p class="muted">Choose a squad to try the demo interaction.</p>
     </div>
 
     <div class="squad-list">
@@ -1103,191 +941,143 @@ select:focus-visible {
     </div>
   </section>
 
-  <!-- PROFILE PAGE -->
+  <!-- PROFILE -->
+
   <section id="profilePage" class="page">
-    <div class="section-heading">
-      <h2>Your profile</h2>
-    </div>
+    <div class="section-heading"><h2>Your profile</h2></div>
 
     <div class="panel">
-      <div class="avatar" style="margin-bottom:18px">🧣</div>
+      <div class="avatar">🧣</div>
       <h2 id="profileHeading">Itachi</h2>
       <p class="muted">Your people. Your world.</p>
 
       <label for="nameInput">Display name</label>
-      <input class="field" id="nameInput"
-             maxlength="30"
+      <input class="field" id="nameInput" maxlength="30"
              placeholder="Enter your display name">
 
       <label for="bioInput">About you</label>
-      <textarea class="field" id="bioInput"
-                maxlength="160"
-                rows="3"
+      <textarea class="field" id="bioInput" maxlength="160" rows="3"
                 placeholder="Tell your people about yourself"></textarea>
 
-      <button class="primary-button" id="saveProfile">
-        Save profile
-      </button>
+      <button class="primary-button" id="saveProfile">Save profile</button>
     </div>
 
     <div class="panel">
       <h2>About Anki</h2>
       <p class="muted">
-        Anki is a demo community concept designed around
-        friendship, personal spaces, and squads.
+        A community concept for friendship, personal spaces, and squads.
       </p>
     </div>
   </section>
-
 </div>
 
 <!-- BOTTOM NAVIGATION -->
+
 <nav class="bottom-nav" aria-label="Main navigation">
-
   <button class="nav-button active" data-page="homePage">
-    <span class="nav-icon">⌂</span>
-    <span>Home</span>
+    <span class="nav-icon">⌂</span><span>Home</span>
   </button>
-
   <button class="nav-button" data-page="chatPage">
-    <span class="nav-icon">▢</span>
-    <span>Chat</span>
+    <span class="nav-icon">▢</span><span>Chat</span>
   </button>
-
   <button class="nav-button" data-page="friendsPage">
-    <span class="nav-icon">♧</span>
-    <span>Friends</span>
+    <span class="nav-icon">♧</span><span>Friends</span>
   </button>
-
   <button class="nav-button" data-page="squadsPage">
-    <span class="nav-icon">⚔️</span>
-    <span>Squads</span>
+    <span class="nav-icon">⚔️</span><span>Squads</span>
   </button>
-
   <button class="nav-button" data-page="profilePage">
-    <span class="nav-icon">●</span>
-    <span>Profile</span>
+    <span class="nav-icon">●</span><span>Profile</span>
   </button>
-
 </nav>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function () {
-  "use strict";
+  const $ = selector => document.querySelector(selector);
+  const $$ = selector => document.querySelectorAll(selector);
 
-  const $ = (selector) => document.querySelector(selector);
-  const $$ = (selector) => document.querySelectorAll(selector);
-
-  const toast = $("#toast");
   let toastTimer;
 
   function notify(message) {
+    const toast = $("#toast");
     toast.textContent = message;
     toast.classList.add("show");
     clearTimeout(toastTimer);
-
-    toastTimer = setTimeout(() => {
-      toast.classList.remove("show");
-    }, 2400);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2400);
   }
 
-  function readStorage(key, fallback) {
+  function read(key, fallback) {
     try {
       const value = localStorage.getItem(key);
       return value === null ? fallback : value;
-    } catch (error) {
+    } catch {
       return fallback;
     }
   }
 
-  function saveStorage(key, value) {
+  function save(key, value) {
     try {
       localStorage.setItem(key, value);
-    } catch (error) {
-      notify("Your browser couldn't save this change.");
+    } catch {
+      notify("Unable to save in this browser.");
     }
   }
 
-  // NAVIGATION
-
-  function showPage(pageId) {
+  function showPage(id) {
     $$(".page").forEach(page => {
-      page.classList.toggle("active", page.id === pageId);
+      page.classList.toggle("active", page.id === id);
     });
 
     $$(".nav-button").forEach(button => {
-      button.classList.toggle(
-        "active",
-        button.dataset.page === pageId
-      );
+      button.classList.toggle("active", button.dataset.page === id);
     });
 
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   $$(".nav-button").forEach(button => {
-    button.addEventListener("click", () => {
-      showPage(button.dataset.page);
-    });
+    button.addEventListener("click", () => showPage(button.dataset.page));
   });
 
-  // PROFILE NAME
-
-  const savedName = readStorage("anki-display-name", "Itachi");
-  const savedBio = readStorage("anki-bio", "");
-  const savedStatus = readStorage("anki-status", "Available");
-
   function updateName(name) {
-    const cleanName = name.trim().slice(0, 30) || "Itachi";
-
-    $("#profileName").textContent = cleanName;
-    $("#profileHeading").textContent = cleanName;
-    $("#nameInput").value = cleanName;
-
-    saveStorage("anki-display-name", cleanName);
+    name = name.trim().slice(0, 30) || "Itachi";
+    $("#profileName").textContent = name;
+    $("#profileHeading").textContent = name;
+    $("#nameInput").value = name;
+    save("anki-name", name);
   }
 
-  updateName(savedName);
-  $("#bioInput").value = savedBio;
-  $("#statusSelect").value = savedStatus;
+  updateName(read("anki-name", "Itachi"));
+  $("#bioInput").value = read("anki-bio", "");
 
-  // STATUS
+  const descriptions = {
+    Available: "Ready to connect with your people",
+    Busy: "Taking a little time for yourself",
+    Away: "Away for a while",
+    Invisible: "Keeping a low profile"
+  };
 
   function updateStatus(status) {
-    const descriptions = {
-      Available: "Ready to connect with your people",
-      Busy: "Taking a little time for yourself",
-      Away: "Away for a while",
-      Invisible: "Keeping a low profile"
-    };
-
+    $("#statusSelect").value = status;
     $("#statusDescription").textContent =
       descriptions[status] || descriptions.Available;
-
-    saveStorage("anki-status", status);
+    save("anki-status", status);
   }
 
-  updateStatus(savedStatus);
+  updateStatus(read("anki-status", "Available"));
 
   $("#statusSelect").addEventListener("change", event => {
     updateStatus(event.target.value);
-    notify("Status updated to " + event.target.value);
+    notify("Status updated.");
   });
-
-  // SAVE PROFILE
 
   $("#saveProfile").addEventListener("click", () => {
     updateName($("#nameInput").value);
-
-    const bio = $("#bioInput").value.trim().slice(0, 160);
-    saveStorage("anki-bio", bio);
-
-    notify("Your demo profile has been saved!");
+    save("anki-bio", $("#bioInput").value.trim().slice(0, 160));
+    notify("Profile saved on this device.");
   });
-
-  // FIND PEOPLE
 
   function openFriends() {
     showPage("friendsPage");
@@ -1296,99 +1086,53 @@ select:focus-visible {
 
   $("#findPeopleButton").addEventListener("click", openFriends);
   $("#seeAllFriends").addEventListener("click", openFriends);
+  $("#searchButton").addEventListener("click", openFriends);
 
-  $("#exploreButton").addEventListener("click", () => {
-    showPage("squadsPage");
-  });
-
-  $("#seeSquads").addEventListener("click", () => {
-    showPage("squadsPage");
-  });
-
-  // SEARCH DEMO FRIENDS
+  $("#exploreButton").addEventListener("click", () => showPage("squadsPage"));
+  $("#seeSquads").addEventListener("click", () => showPage("squadsPage"));
 
   $("#friendSearch").addEventListener("input", event => {
     const query = event.target.value.toLowerCase();
-
-    $$("#allFriends .chat-message").forEach(friend => {
-      friend.style.display =
-        friend.textContent.toLowerCase().includes(query)
-          ? ""
-          : "none";
+    $$("#allFriends .chat-message").forEach(item => {
+      item.style.display =
+        item.textContent.toLowerCase().includes(query) ? "" : "none";
     });
   });
-
-  // FRIEND CARDS
 
   $$("[data-friend]").forEach(button => {
     button.addEventListener("click", () => {
-      const name = button.dataset.friend;
-      notify(name + " is a sample friend in this demo.");
+      notify(button.dataset.friend + " is a sample friend.");
     });
   });
-
-  // CHAT DEMO
 
   $$("[data-message]").forEach(button => {
     button.addEventListener("click", () => {
-      notify(
-        "Demo conversation with " +
-        button.dataset.message +
-        ". Real messaging needs a server."
-      );
+      notify("Demo conversation with " + button.dataset.message + ".");
     });
   });
-
-  // SQUAD DEMO
 
   $$("[data-squad]").forEach(button => {
     button.addEventListener("click", () => {
-      const name = button.dataset.squad;
-
-      notify(
-        "You selected " + name +
-        ". Squad membership is a demo feature."
-      );
+      notify(button.dataset.squad + " selected. Membership is demo-only.");
     });
   });
 
-  // HEADER ACTIONS
-
-  $("#searchButton").addEventListener("click", openFriends);
-
   $("#menuButton").addEventListener("click", () => {
-    const options = [
-      "homePage",
-      "chatPage",
-      "friendsPage",
-      "squadsPage",
-      "profilePage"
-    ];
-
-    const labels = [
-      "Home",
-      "Chat",
-      "Friends",
-      "Squads",
-      "Profile"
-    ];
-
-    const choice = window.prompt(
-      "Go to:\n1. Home\n2. Chat\n3. Friends\n4. Squads\n5. Profile"
+    const choice = prompt(
+      "Enter page number:\n1 Home\n2 Chat\n3 Friends\n4 Squads\n5 Profile"
     );
+
+    const pages = [
+      "homePage", "chatPage", "friendsPage", "squadsPage", "profilePage"
+    ];
 
     const index = Number(choice) - 1;
 
-    if (Number.isInteger(index) && index >= 0 && index < options.length) {
-      showPage(options[index]);
+    if (Number.isInteger(index) && index >= 0 && index < pages.length) {
+      showPage(pages[index]);
     }
   });
-
 })();
 </script>
-
 </body>
 </html>
-
-
-  
