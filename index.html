@@ -1174,5 +1174,271 @@ button {
 
   console.log("Anki Firebase connected!");
 </script>
+  <script type="module">
+import { getApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+const app = getApp();
+const auth = getAuth(app);
+
+const style = document.createElement("style");
+style.textContent = `
+#anki-account-button {
+  position: fixed;
+  right: 16px;
+  bottom: 105px;
+  z-index: 9998;
+  border: 1px solid #8e536b;
+  border-radius: 30px;
+  background: #8f2448;
+  color: white;
+  padding: 13px 18px;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 4px 18px #0008;
+}
+#anki-account-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: #08060beF;
+  font-family: Arial, sans-serif;
+}
+#anki-account-card {
+  width: 100%;
+  max-width: 390px;
+  box-sizing: border-box;
+  padding: 25px;
+  border: 1px solid #754057;
+  border-radius: 24px;
+  background: #171018;
+  color: #fff;
+}
+#anki-account-card h2 {
+  margin-top: 0;
+  font-size: 29px;
+}
+#anki-account-card p {
+  color: #c9b9c5;
+  line-height: 1.5;
+}
+#anki-account-card input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 12px 0;
+  padding: 14px;
+  border: 1px solid #604052;
+  border-radius: 12px;
+  background: #241923;
+  color: white;
+  font-size: 16px;
+}
+#anki-account-card button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  border: 0;
+  border-radius: 12px;
+  background: #c74770;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+#anki-account-card button.secondary {
+  background: #332632;
+}
+#anki-account-message {
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+`;
+document.head.appendChild(style);
+
+const accountButton = document.createElement("button");
+accountButton.id = "anki-account-button";
+accountButton.textContent = "Sign in / Join";
+document.body.appendChild(accountButton);
+
+const overlay = document.createElement("div");
+overlay.id = "anki-account-overlay";
+overlay.innerHTML = `
+  <section id="anki-account-card">
+    <h2>Welcome to Anki 🌸</h2>
+    <p>Your people. Your world. Sign in to connect with your friends.</p>
+
+    <form id="anki-account-form">
+      <input id="anki-username"
+        type="text" autocomplete="nickname"
+        placeholder="Username (for new accounts)"
+        maxlength="30">
+
+      <input id="anki-email"
+        type="email" autocomplete="email"
+        placeholder="Email address" required>
+
+      <input id="anki-password"
+        type="password" autocomplete="current-password"
+        placeholder="Password (at least 6 characters)"
+        minlength="6" required>
+
+      <button id="anki-submit" type="submit">Log in</button>
+    </form>
+
+    <button id="anki-toggle" class="secondary" type="button">
+      Create a new account
+    </button>
+
+    <button id="anki-close" class="secondary" type="button">
+      Continue browsing
+    </button>
+
+    <button id="anki-logout" class="secondary"
+      type="button" hidden>Log out</button>
+
+    <p id="anki-account-message" role="status"></p>
+  </section>
+`;
+document.body.appendChild(overlay);
+
+let creatingAccount = false;
+let currentUser = null;
+
+const $ = id => document.getElementById(id);
+const message = text => {
+  $("anki-account-message").textContent = text;
+};
+
+function openAccount() {
+  overlay.style.display = "flex";
+  message("");
+}
+
+function closeAccount() {
+  overlay.style.display = "none";
+}
+
+accountButton.addEventListener("click", openAccount);
+$("anki-close").addEventListener("click", closeAccount);
+
+$("anki-toggle").addEventListener("click", () => {
+  creatingAccount = !creatingAccount;
+
+  $("anki-username").style.display =
+    creatingAccount ? "block" : "none";
+
+  $("anki-username").required = creatingAccount;
+
+  $("anki-password").autocomplete =
+    creatingAccount ? "new-password" : "current-password";
+
+  $("anki-submit").textContent =
+    creatingAccount ? "Create account" : "Log in";
+
+  $("anki-toggle").textContent =
+    creatingAccount ? "I already have an account" :
+    "Create a new account";
+
+  message("");
+});
+
+$("anki-username").style.display = "none";
+
+$("anki-account-form").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const email = $("anki-email").value.trim();
+  const password = $("anki-password").value;
+  const username = $("anki-username").value.trim();
+
+  if (creatingAccount && !username) {
+    message("Please enter a username.");
+    return;
+  }
+
+  $("anki-submit").disabled = true;
+  message("Please wait…");
+
+  try {
+    if (creatingAccount) {
+      const result = await createUserWithEmailAndPassword(
+        auth, email, password
+      );
+
+      await updateProfile(result.user, {
+        displayName: username
+      });
+
+      message("Account created successfully! Welcome to Anki.");
+    } else {
+      await signInWithEmailAndPassword(auth, email, password);
+      message("You are now logged in!");
+    }
+  } catch (error) {
+    const errors = {
+      "auth/email-already-in-use": "This email already has an account. Try logging in.",
+      "auth/invalid-email": "Please enter a valid email address.",
+      "auth/weak-password": "Choose a stronger password with at least 6 characters.",
+      "auth/invalid-credential": "Email or password is incorrect.",
+      "auth/operation-not-allowed": "Email/password login is not enabled in Firebase.",
+      "auth/network-request-failed": "Network error. Check your internet connection."
+    };
+
+    message(errors[error.code] ||
+      "Could not complete this action. Please try again.");
+  } finally {
+    $("anki-submit").disabled = false;
+  }
+});
+
+$("anki-logout").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    message("You have logged out.");
+  } catch {
+    message("Could not log out. Please try again.");
+  }
+});
+
+onAuthStateChanged(auth, user => {
+  currentUser = user;
+
+  if (user) {
+    accountButton.textContent =
+      "👤 " + (user.displayName || user.email || "My account");
+
+    $("anki-toggle").hidden = true;
+    $("anki-username").style.display = "none";
+    $("anki-submit").hidden = true;
+    $("anki-logout").hidden = false;
+    $("anki-email").value = user.email || "";
+    $("anki-password").value = "";
+    $("anki-password").hidden = true;
+
+    message("Signed in as " + (user.displayName || user.email));
+  } else {
+    accountButton.textContent = "Sign in / Join";
+
+    $("anki-toggle").hidden = false;
+    $("anki-submit").hidden = false;
+    $("anki-logout").hidden = true;
+    $("anki-email").value = "";
+    $("anki-password").hidden = false;
+  }
+});
+
+console.log("Anki account interface loaded.");
+</script>
 </body>
 </html>
