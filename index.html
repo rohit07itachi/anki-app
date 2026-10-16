@@ -22,10 +22,12 @@
 
 body {
   margin: 0;
-  background: var(--bg);
   color: var(--white);
+  background:
+    radial-gradient(ellipse at 50% 25%, #26101d 0%, transparent 48%),
+    var(--bg);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  padding-bottom: calc(105px + env(safe-area-inset-bottom));
+  padding-bottom: calc(100px + env(safe-area-inset-bottom));
 }
 
 button, input, textarea, select {
@@ -40,70 +42,80 @@ button {
   width: 100%;
   max-width: 1000px;
   margin: auto;
-  padding: 20px 24px;
+  padding: 20px 32px;
 }
 
-/* HEADER */
+/* HEADER — MATCHING YOUR SECOND SCREENSHOT */
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 28px;
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 22px;
   min-width: 0;
 }
 
 .brand-logo {
-  width: 55px;
-  height: 55px;
+  width: 140px;
+  height: 140px;
   flex-shrink: 0;
-  overflow: hidden;
   display: grid;
   place-items: center;
+  overflow: hidden;
+  border: 2px solid #49303e;
+  border-radius: 38px;
   background: #050407;
-  border: 1px solid #49303e;
-  border-radius: 17px;
 }
 
 .brand-logo img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
+.brand-text {
+  min-width: 0;
+}
+
 .brand-name {
-  font-size: 29px;
-  font-weight: 900;
   margin: 0;
-  letter-spacing: -1px;
+  color: #fff8fc;
+  font-size: 76px;
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -3px;
 }
 
 .brand-tagline {
-  margin: 4px 0 0;
-  color: var(--muted);
-  font-size: 13px;
+  margin: 20px 0 0;
+  color: #aaa1ad;
+  font-size: 30px;
+  line-height: 1.3;
+  white-space: nowrap;
 }
 
 .header-actions {
   display: flex;
-  gap: 10px;
+  gap: 28px;
 }
 
 .icon-button {
-  width: 47px;
-  height: 47px;
-  border: 1px solid var(--border);
+  width: 126px;
+  height: 126px;
+  flex-shrink: 0;
+  border: 2px solid var(--border);
   border-radius: 50%;
-  background: #17121a;
   color: white;
-  font-size: 22px;
+  background: #151119;
+  font-size: 48px;
 }
 
 /* HERO */
@@ -131,10 +143,10 @@ button {
 }
 
 .hero h2 {
+  margin: 28px 0 18px;
   font-size: clamp(35px, 6vw, 54px);
   line-height: 1.1;
   letter-spacing: -2px;
-  margin: 28px 0 18px;
 }
 
 .hero h2 span {
@@ -142,10 +154,10 @@ button {
 }
 
 .hero-description {
+  margin: 0;
   color: var(--muted);
   font-size: 17px;
   line-height: 1.8;
-  margin: 0;
 }
 
 .hero-buttons {
@@ -163,15 +175,15 @@ button {
 }
 
 .primary-button {
+  color: white;
   background: linear-gradient(110deg, #e15376, #a51d43);
   border: 0;
-  color: white;
 }
 
 .secondary-button {
+  color: white;
   background: #252029;
   border: 1px solid #493847;
-  color: white;
 }
 
 .pills {
@@ -182,14 +194,14 @@ button {
 }
 
 .pill {
-  border: 1px solid #493442;
-  border-radius: 100px;
   padding: 10px 14px;
   color: #d1c7d1;
+  border: 1px solid #493442;
+  border-radius: 100px;
   font-size: 13px;
 }
 
-/* PROFILE STATUS */
+/* STATUS */
 
 .status-card {
   display: flex;
@@ -225,8 +237,8 @@ button {
 }
 
 .status-info p {
-  color: var(--muted);
   margin: 0;
+  color: var(--muted);
   font-size: 14px;
   line-height: 1.5;
 }
@@ -260,8 +272,8 @@ button {
 .freedom-card::after {
   content: "";
   position: absolute;
-  bottom: 0;
   right: 28px;
+  bottom: 0;
   width: 45%;
   height: 7px;
   background: linear-gradient(90deg, transparent, #a51d43, #ed3158);
@@ -271,8 +283,6 @@ button {
   flex: 0 0 220px;
   width: 220px;
   min-width: 0;
-  display: grid;
-  place-items: center;
 }
 
 .wings-emblem {
@@ -288,28 +298,28 @@ button {
 }
 
 .freedom-eyebrow {
+  margin: 0 0 26px;
   color: var(--pink);
   font-size: 21px;
   font-weight: 900;
   line-height: 1.55;
   letter-spacing: 5px;
-  margin: 0 0 26px;
 }
 
 .freedom-title {
+  margin: 0 0 24px;
   color: var(--white);
   font-size: clamp(27px, 4vw, 42px);
   line-height: 1.2;
   letter-spacing: -1px;
-  margin: 0 0 24px;
   font-weight: 850;
 }
 
 .freedom-description {
+  margin: 0;
   color: #d2cbd2;
   font-size: 24px;
   line-height: 1.8;
-  margin: 0;
 }
 
 /* SECTIONS */
@@ -333,24 +343,24 @@ button {
 }
 
 .text-button {
+  padding: 8px 0;
   color: var(--pink);
   background: transparent;
   border: 0;
   font-weight: 850;
-  padding: 8px 0;
 }
 
 .friends-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
 .friend-card {
-  padding: 10px 4px;
   min-width: 0;
-  text-align: center;
+  padding: 10px 4px;
   color: white;
+  text-align: center;
   background: transparent;
   border: 1px solid transparent;
   border-radius: 22px;
@@ -374,14 +384,13 @@ button {
 }
 
 .friend-name {
-  font-weight: 800;
   margin-bottom: 8px;
-  overflow-wrap: anywhere;
+  font-weight: 800;
 }
 
 .friend-status {
-  font-size: 12px;
   color: var(--muted);
+  font-size: 12px;
 }
 
 .online-dot {
@@ -405,9 +414,9 @@ button {
   align-items: center;
   gap: 14px;
   padding: 16px;
+  background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 20px;
-  background: var(--panel);
 }
 
 .squad-icon {
@@ -438,15 +447,15 @@ button {
 }
 
 .join-button {
-  color: var(--pink);
-  border: 1px solid #713047;
-  background: #341625;
-  border-radius: 12px;
   padding: 10px 13px;
+  color: var(--pink);
+  background: #341625;
+  border: 1px solid #713047;
+  border-radius: 12px;
   font-weight: 800;
 }
 
-/* PAGES */
+/* OTHER PAGES */
 
 .page {
   display: none;
@@ -491,14 +500,14 @@ button {
   border-radius: 16px;
 }
 
-/* BOTTOM NAV */
+/* BOTTOM NAVIGATION */
 
 .bottom-nav {
   position: fixed;
   z-index: 10;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 4px;
@@ -509,17 +518,17 @@ button {
 }
 
 .nav-button {
+  min-height: 66px;
+  padding: 7px 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  min-height: 66px;
-  padding: 7px 2px;
-  border: 0;
-  border-radius: 18px;
   color: #99919f;
   background: transparent;
+  border: 0;
+  border-radius: 18px;
   font-size: 12px;
   font-weight: 800;
 }
@@ -533,7 +542,7 @@ button {
   background: #3c172a;
 }
 
-/* TOAST */
+/* NOTIFICATIONS */
 
 .toast {
   position: fixed;
@@ -555,29 +564,47 @@ button {
   display: block;
 }
 
-/* IPHONE RESPONSIVE */
+/* IPHONE */
 
 @media (max-width: 600px) {
   .app {
     padding: 16px;
   }
 
+  .header {
+    gap: 8px;
+    margin-bottom: 26px;
+  }
+
+  .brand {
+    gap: 12px;
+  }
+
   .brand-logo {
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
+    border-radius: 19px;
   }
 
   .brand-name {
-    font-size: 26px;
+    font-size: 34px;
+    letter-spacing: -1px;
   }
 
   .brand-tagline {
-    font-size: 11px;
+    margin-top: 5px;
+    font-size: 12px;
+    white-space: normal;
+  }
+
+  .header-actions {
+    gap: 8px;
   }
 
   .icon-button {
-    width: 42px;
-    height: 42px;
+    width: 43px;
+    height: 43px;
+    font-size: 22px;
   }
 
   .hero {
@@ -641,16 +668,16 @@ button {
   }
 
   .freedom-eyebrow {
+    margin-bottom: 15px;
     font-size: 10px;
     letter-spacing: 2px;
     line-height: 1.8;
-    margin-bottom: 15px;
   }
 
   .freedom-title {
+    margin-bottom: 12px;
     font-size: 19px;
     line-height: 1.35;
-    margin-bottom: 12px;
   }
 
   .freedom-description {
@@ -660,11 +687,6 @@ button {
 
   .section-heading h2 {
     font-size: 24px;
-  }
-
-  .friends-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 4px;
   }
 
   .friend-avatar {
@@ -726,9 +748,10 @@ button {
     <div class="brand">
       <div class="brand-logo">
         <img src="./anki_wings_of_freedom.png"
-             alt="Anki Wings of Freedom logo">
+             alt="Wings of Freedom">
       </div>
-      <div>
+
+      <div class="brand-text">
         <h1 class="brand-name">Anki</h1>
         <p class="brand-tagline">Your people. Your world.</p>
       </div>
@@ -740,13 +763,10 @@ button {
     </div>
   </header>
 
-  <!-- HOME -->
-
   <main id="homePage" class="page active">
 
     <section class="hero">
       <div class="hero-label">✦ YOUR OWN LITTLE WORLD</div>
-
       <h2>Beyond the walls.<br><span>Together.</span></h2>
 
       <p class="hero-description">
@@ -771,20 +791,19 @@ button {
 
     <section class="status-card">
       <div class="avatar">🧣</div>
+
       <div class="status-info">
         <h2 id="profileName">Itachi</h2>
         <p id="statusDescription">Ready to connect with your people</p>
       </div>
 
       <select class="status-select" id="statusSelect" aria-label="Availability">
-        <option>Available</option>
-        <option>Busy</option>
-        <option>Away</option>
-        <option>Invisible</option>
+        <option value="Available">Available</option>
+        <option value="Busy">Busy</option>
+        <option value="Away">Away</option>
+        <option value="Invisible">Invisible</option>
       </select>
     </section>
-
-    <!-- REAL IMAGE FILE, NOT A REDRAWN SVG -->
 
     <section class="freedom-card">
       <div class="emblem-wrap">
@@ -794,9 +813,7 @@ button {
       </div>
 
       <div class="freedom-content">
-        <p class="freedom-eyebrow">
-          A LITTLE SYMBOL. A LOT OF MEANING.
-        </p>
+        <p class="freedom-eyebrow">A LITTLE SYMBOL. A LOT OF MEANING.</p>
         <h2 class="freedom-title">Keep your people close.</h2>
         <p class="freedom-description">
           Your own corner of the world, made for your crew.
@@ -859,14 +876,11 @@ button {
     </section>
   </main>
 
-  <!-- CHAT -->
-
   <section id="chatPage" class="page">
     <div class="section-heading"><h2>Messages</h2></div>
-
     <div class="panel">
       <h2>Your conversations</h2>
-      <p class="muted">These are sample conversations for the demo.</p>
+      <p class="muted">Sample conversations for the Anki demo.</p>
 
       <div class="chat-message">
         <strong>🧣 Mikasa</strong>
@@ -882,11 +896,8 @@ button {
     </div>
   </section>
 
-  <!-- FRIENDS -->
-
   <section id="friendsPage" class="page">
     <div class="section-heading"><h2>Your people</h2></div>
-
     <div class="panel">
       <h2>Find your people</h2>
       <input class="field" id="friendSearch" type="search"
@@ -901,11 +912,8 @@ button {
     </div>
   </section>
 
-  <!-- SQUADS -->
-
   <section id="squadsPage" class="page">
     <div class="section-heading"><h2>Explore squads</h2></div>
-
     <div class="panel">
       <h2>Find your crew ⚔️</h2>
       <p class="muted">Choose a squad to try the demo interaction.</p>
@@ -941,8 +949,6 @@ button {
     </div>
   </section>
 
-  <!-- PROFILE -->
-
   <section id="profilePage" class="page">
     <div class="section-heading"><h2>Your profile</h2></div>
 
@@ -964,14 +970,10 @@ button {
 
     <div class="panel">
       <h2>About Anki</h2>
-      <p class="muted">
-        A community concept for friendship, personal spaces, and squads.
-      </p>
+      <p class="muted">A community concept for friendship, personal spaces, and squads.</p>
     </div>
   </section>
 </div>
-
-<!-- BOTTOM NAVIGATION -->
 
 <nav class="bottom-nav" aria-label="Main navigation">
   <button class="nav-button active" data-page="homePage">
@@ -994,10 +996,9 @@ button {
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-(function () {
+(() => {
   const $ = selector => document.querySelector(selector);
   const $$ = selector => document.querySelectorAll(selector);
-
   let toastTimer;
 
   function notify(message) {
@@ -1094,8 +1095,8 @@ button {
   $("#friendSearch").addEventListener("input", event => {
     const query = event.target.value.toLowerCase();
     $$("#allFriends .chat-message").forEach(item => {
-      item.style.display =
-        item.textContent.toLowerCase().includes(query) ? "" : "none";
+      item.style.display = item.textContent.toLowerCase().includes(query)
+        ? "" : "none";
     });
   });
 
